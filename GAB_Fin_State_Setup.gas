@@ -1,0 +1,173 @@
+Program.Sub.ScreenSU.Start
+gui.FrmSel..create
+gui.FrmSel..caption("Financial Statement Selection")
+gui.FrmSel..size(5000,2475)
+gui.FrmSel..minx(0)
+gui.FrmSel..miny(0)
+gui.FrmSel..position(0,0)
+gui.FrmSel..event(unload,Unload)
+gui.FrmSel..alwaysontop(False)
+gui.FrmSel..fontname("Arial")
+gui.FrmSel..fontsize(8)
+gui.FrmSel..forecolor(0)
+gui.FrmSel..fontstyle(,,,,)
+gui.FrmSel..BackColor(-2147483633)
+gui.FrmSel..controlbox(True)
+gui.FrmSel..maxbutton(True)
+gui.FrmSel..minbutton(True)
+gui.FrmSel..mousepointer(0)
+gui.FrmSel..moveable(True)
+gui.FrmSel..sizeable(True)
+gui.FrmSel..ShowInTaskBar(True)
+gui.FrmSel..titlebar(True)
+gui.FrmSel.optLayout.create(option)
+gui.FrmSel.optLayout.caption("Create Statement Layouts")
+gui.FrmSel.optLayout.visible(True)
+gui.FrmSel.optLayout.size(2800,255)
+gui.FrmSel.optLayout.zorder(0)
+gui.FrmSel.optLayout.position(1100,200)
+gui.FrmSel.optLayout.enabled(True)
+gui.FrmSel.optLayout.alignment(0)
+gui.FrmSel.optLayout.fontname("Arial")
+gui.FrmSel.optLayout.fontsize(8)
+gui.FrmSel.optLayout.defaultvalue("")
+gui.FrmSel.optLayout.controlgroup(0)
+gui.FrmSel.optAcctInfo.create(option)
+gui.FrmSel.optAcctInfo.caption("Setup Statement Information")
+gui.FrmSel.optAcctInfo.visible(True)
+gui.FrmSel.optAcctInfo.size(2800,255)
+gui.FrmSel.optAcctInfo.zorder(0)
+gui.FrmSel.optAcctInfo.position(1100,600)
+gui.FrmSel.optAcctInfo.enabled(True)
+gui.FrmSel.optAcctInfo.alignment(0)
+gui.FrmSel.optAcctInfo.fontname("Arial")
+gui.FrmSel.optAcctInfo.fontsize(8)
+gui.FrmSel.optAcctInfo.defaultvalue("")
+gui.FrmSel.optAcctInfo.controlgroup(0)
+gui.FrmSel.cmdOK.create(button)
+gui.FrmSel.cmdOK.caption("OK")
+gui.FrmSel.cmdOK.visible(True)
+gui.FrmSel.cmdOK.size(855,375)
+gui.FrmSel.cmdOK.zorder(0)
+gui.FrmSel.cmdOK.position(1800,1400)
+gui.FrmSel.cmdOK.enabled(True)
+gui.FrmSel.cmdOK.fontname("Arial")
+gui.FrmSel.cmdOK.fontsize(8)
+gui.FrmSel.cmdOK.event(click,cmdok_click)
+gui.FrmSel.cmdOK.defaultvalue("")
+gui.FrmSel.cmdOK.controlgroup(0)
+gui.FrmSel.optReports.create(option)
+gui.FrmSel.optReports.caption("Assign Reports")
+gui.FrmSel.optReports.visible(True)
+gui.FrmSel.optReports.size(2800,255)
+gui.FrmSel.optReports.zorder(0)
+gui.FrmSel.optReports.position(1100,1000)
+gui.FrmSel.optReports.enabled(True)
+gui.FrmSel.optReports.alignment(0)
+gui.FrmSel.optReports.fontname("Arial")
+gui.FrmSel.optReports.fontsize(8)
+gui.FrmSel.optReports.defaultvalue("")
+gui.FrmSel.optReports.controlgroup(0)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'Allow the selection of Layout, Information, and Run (Detail)
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'============================================================================================================================================================================================================================
+
+V.Local.sIcon.Declare(String)
+
+'F.Intrinsic.String.Build("{0}\gss.ico",V.Caller.InstallDir,V.Local.sIcon)
+'Gui.FrmSel..Icon(V.Local.sIcon)
+
+Gui.FrmSel..Show
+
+'============================================================================================================================================================================================================================
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_Fin_State_Selection.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.Main.End
+
+program.sub.Unload.start
+F.Intrinsic.Control.SetErrorHandler("Unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'============================================================================================================================================================================================================================
+
+F.Intrinsic.Control.End
+
+'============================================================================================================================================================================================================================
+F.Intrinsic.Control.Label("Unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_Fin_State_Selection.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+
+program.sub.Unload.end
+
+program.sub.cmdok_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdOK_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'============================================================================================================================================================================================================================
+
+V.Local.sGABScript.Declare(String)
+V.Local.iRet.Declare(Long)
+
+'Gui.FrmSel..Visible(False)
+
+F.Intrinsic.Control.If(V.Screen.FrmSel!optLayout.Value,=,True)
+	F.Intrinsic.String.Build("{0}\GAB\GAS\GAB_Fin_State_Layouts.gas",V.Caller.PluginsDir,V.Local.sGABScript)
+'	F.Global.General.CallSyncGAS(V.Local.sGABScript)
+	F.Global.General.CallAsyncGAS(V.Local.sGABScript,V.Local.iRet)
+
+F.Intrinsic.Control.ElseIf(V.Screen.FrmSel!optAcctInfo.Value,=,True)
+	F.Intrinsic.String.Build("{0}\GAB\GAS\GAB_Fin_State_Acct_Info.gas",V.Caller.PluginsDir,V.Local.sGABScript)
+'	F.Global.General.CallSyncGAS(V.Local.sGABScript)
+	F.Global.General.CallAsyncGAS(V.Local.sGABScript,V.Local.iRet)
+
+F.Intrinsic.Control.ElseIf(V.Screen.FrmSel!optReports.Value,=,True)
+	F.Intrinsic.String.Build("{0}\GAB\GAS\GAB_Fin_State_Report.gas",V.Caller.PluginsDir,V.Local.sGABScript)
+'	F.Global.General.CallSyncGAS(V.Local.sGABScript)
+	F.Global.General.CallAsyncGAS(V.Local.sGABScript,V.Local.iRet)
+
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("No Selection was made.","Selection Check")
+F.Intrinsic.Control.EndIf
+
+'Gui.FrmSel..Visible(True)
+
+'============================================================================================================================================================================================================================
+F.Intrinsic.Control.Label("cmdOK_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_Fin_State_Selection.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdok_click.end
+
+Program.Sub.subAssignRpts.Start
+
+Program.Sub.subAssignRpts.End
+
+Program.Sub.Comments.Start
+${$0$}$Gab_Fin_State_Selection$}$SUPERVSR$}$01/01/1900
+Program.Sub.Comments.End
+
