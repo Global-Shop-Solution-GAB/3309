@@ -1,0 +1,1226 @@
+Program.Sub.ScreenSU.Start
+gui.FrmDtl..create
+gui.FrmDtl..caption("GAB Financial Statements 12 Month Trend")
+gui.FrmDtl..size(6100,3390)
+gui.FrmDtl..minx(0)
+gui.FrmDtl..miny(0)
+gui.FrmDtl..position(0,0)
+gui.FrmDtl..event(unload,Unload)
+gui.FrmDtl..alwaysontop(False)
+gui.FrmDtl..fontname("Arial")
+gui.FrmDtl..fontsize(8)
+gui.FrmDtl..forecolor(0)
+gui.FrmDtl..fontstyle(,,,,)
+gui.FrmDtl..BackColor(-2147483633)
+gui.FrmDtl..controlbox(True)
+gui.FrmDtl..maxbutton(False)
+gui.FrmDtl..minbutton(True)
+gui.FrmDtl..mousepointer(0)
+gui.FrmDtl..moveable(True)
+gui.FrmDtl..sizeable(False)
+gui.FrmDtl..ShowInTaskBar(True)
+gui.FrmDtl..titlebar(True)
+gui.FrmDtl.lblDesc.create(label,"Select a Financial Statement to run:",True,2595,255,1,400,1800,True,0,Arial,8,-2147483633,0)
+gui.FrmDtl.lblDesc.defaultvalue("")
+gui.FrmDtl.lblDesc.controlgroup(0)
+gui.FrmDtl.cboFin.create(combobox)
+gui.FrmDtl.cboFin.text("")
+gui.FrmDtl.cboFin.visible(True)
+gui.FrmDtl.cboFin.size(3750,330)
+gui.FrmDtl.cboFin.zorder(0)
+gui.FrmDtl.cboFin.position(450,2100)
+gui.FrmDtl.cboFin.enabled(True)
+gui.FrmDtl.cboFin.fontname("Arial")
+gui.FrmDtl.cboFin.fontsize(8)
+gui.FrmDtl.cboFin.defaultvalue("")
+gui.FrmDtl.cboFin.controlgroup(0)
+gui.FrmDtl.cmdRun.create(button)
+gui.FrmDtl.cmdRun.caption("Run")
+gui.FrmDtl.cmdRun.visible(True)
+gui.FrmDtl.cmdRun.size(800,375)
+gui.FrmDtl.cmdRun.zorder(0)
+gui.FrmDtl.cmdRun.position(4400,2050)
+gui.FrmDtl.cmdRun.enabled(True)
+gui.FrmDtl.cmdRun.fontname("Arial")
+gui.FrmDtl.cmdRun.fontsize(8)
+gui.FrmDtl.cmdRun.event(click,cmdrun_click)
+gui.FrmDtl.cmdRun.defaultvalue("")
+gui.FrmDtl.cmdRun.controlgroup(0)
+gui.FrmDtl.lblTrend.create(label,"Build 36 Months Data?",True,1935,255,1,200,200,True,0,Arial,8,-2147483633,0)
+gui.FrmDtl.lblTrend.defaultvalue("")
+gui.FrmDtl.lblTrend.controlgroup(0)
+gui.FrmDtl.lblMonth.create(label,"Month:",True,960,255,1,450,750,True,0,Arial,8,-2147483633,0)
+gui.FrmDtl.lblMonth.defaultvalue("")
+gui.FrmDtl.lblMonth.controlgroup(0)
+gui.FrmDtl.lblYear.create(label,"Year:",True,585,255,1,2350,750,True,0,Arial,8,-2147483633,0)
+gui.FrmDtl.lblYear.defaultvalue("")
+gui.FrmDtl.lblYear.controlgroup(0)
+gui.FrmDtl.dropdownlistMonth.create(combobox)
+gui.FrmDtl.dropdownlistMonth.text("")
+gui.FrmDtl.dropdownlistMonth.visible(True)
+gui.FrmDtl.dropdownlistMonth.size(1700,330)
+gui.FrmDtl.dropdownlistMonth.zorder(0)
+gui.FrmDtl.dropdownlistMonth.position(450,1000)
+gui.FrmDtl.dropdownlistMonth.enabled(True)
+gui.FrmDtl.dropdownlistMonth.fontname("Arial")
+gui.FrmDtl.dropdownlistMonth.fontsize(8)
+gui.FrmDtl.dropdownlistMonth.defaultvalue("")
+gui.FrmDtl.dropdownlistMonth.controlgroup(0)
+gui.FrmDtl.dropdownlistYear.create(combobox)
+gui.FrmDtl.dropdownlistYear.text("")
+gui.FrmDtl.dropdownlistYear.visible(True)
+gui.FrmDtl.dropdownlistYear.size(1700,330)
+gui.FrmDtl.dropdownlistYear.zorder(0)
+gui.FrmDtl.dropdownlistYear.position(2500,1000)
+gui.FrmDtl.dropdownlistYear.enabled(True)
+gui.FrmDtl.dropdownlistYear.fontname("Arial")
+gui.FrmDtl.dropdownlistYear.fontsize(8)
+gui.FrmDtl.dropdownlistYear.defaultvalue("")
+gui.FrmDtl.dropdownlistYear.controlgroup(0)
+gui.FrmDtl.lblLastRun.create(label,"****Text Here****",True,3045,255,1,1900,200,True,0,Arial,8,-2147483633,0)
+gui.FrmDtl.lblLastRun.defaultvalue("")
+gui.FrmDtl.lblLastRun.controlgroup(0)
+gui.FrmDtl.cmdUpdate.create(button)
+gui.FrmDtl.cmdUpdate.caption("Update")
+gui.FrmDtl.cmdUpdate.visible(True)
+gui.FrmDtl.cmdUpdate.size(800,375)
+gui.FrmDtl.cmdUpdate.zorder(0)
+gui.FrmDtl.cmdUpdate.position(4400,950)
+gui.FrmDtl.cmdUpdate.enabled(True)
+gui.FrmDtl.cmdUpdate.fontname("Arial")
+gui.FrmDtl.cmdUpdate.fontsize(8)
+gui.FrmDtl.cmdUpdate.event(click,cmdUpdate_click)
+gui.FrmDtl.cmdUpdate.defaultvalue("")
+gui.FrmDtl.cmdUpdate.controlgroup(0)
+gui.FrmDtl.optYes.create(option)
+gui.FrmDtl.optYes.caption("Yes")
+gui.FrmDtl.optYes.visible(True)
+gui.FrmDtl.optYes.size(600,255)
+gui.FrmDtl.optYes.zorder(0)
+gui.FrmDtl.optYes.position(450,450)
+gui.FrmDtl.optYes.enabled(True)
+gui.FrmDtl.optYes.alignment(0)
+gui.FrmDtl.optYes.fontname("Arial")
+gui.FrmDtl.optYes.fontsize(8)
+gui.FrmDtl.optYes.event(click,opt_click)
+gui.FrmDtl.optYes.defaultvalue("")
+gui.FrmDtl.optYes.controlgroup(0)
+gui.FrmDtl.optNo.create(option)
+gui.FrmDtl.optNo.caption("No")
+gui.FrmDtl.optNo.visible(True)
+gui.FrmDtl.optNo.size(600,255)
+gui.FrmDtl.optNo.zorder(0)
+gui.FrmDtl.optNo.position(1250,450)
+gui.FrmDtl.optNo.enabled(True)
+gui.FrmDtl.optNo.alignment(0)
+gui.FrmDtl.optNo.fontname("Arial")
+gui.FrmDtl.optNo.fontsize(8)
+gui.FrmDtl.optNo.event(click,opt_click)
+gui.FrmDtl.optNo.defaultvalue("")
+gui.FrmDtl.optNo.controlgroup(0)
+gui.FrmDtl.progress36.create(progressbar)
+gui.FrmDtl.progress36.visible(False)
+gui.FrmDtl.progress36.size(3250,255)
+gui.FrmDtl.progress36.zorder(0)
+gui.FrmDtl.progress36.position(2000,450)
+gui.FrmDtl.progress36.enabled(True)
+gui.FrmDtl.progressDtl.create(progressbar)
+gui.FrmDtl.progressDtl.visible(False)
+gui.FrmDtl.progressDtl.size(3750,255)
+gui.FrmDtl.progressDtl.zorder(0)
+gui.FrmDtl.progressDtl.position(450,2500)
+gui.FrmDtl.progressDtl.enabled(True)
+gui.FrmDtl.optYes.tabstop(True)
+gui.FrmDtl.optYes.tabindex(1)
+gui.FrmDtl.optNo.tabstop(True)
+gui.FrmDtl.optNo.tabindex(2)
+gui.FrmDtl.dropdownlistMonth.tabstop(True)
+gui.FrmDtl.dropdownlistMonth.tabindex(3)
+gui.FrmDtl.dropdownlistYear.tabstop(True)
+gui.FrmDtl.dropdownlistYear.tabindex(4)
+gui.FrmDtl.cmdUpdate.tabstop(True)
+gui.FrmDtl.cmdUpdate.tabindex(5)
+gui.FrmDtl.cboFin.tabstop(True)
+gui.FrmDtl.cboFin.tabindex(6)
+gui.FrmDtl.cmdRun.tabstop(True)
+gui.FrmDtl.cmdRun.tabindex(7)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.UDT.uAddSub.Define("VALUE",Long,VALUE)
+Variable.UDT.uAddSub.Define("TYPE",String,TYPE)
+Variable.uGlobal.uAddSub.Declare("uAddSub")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'This program is going to populate the data into a table to report from
+
+V.Global.iGrpOrder.Declare(Long)
+V.Global.iCPamt.Declare(Long)
+V.Global.fCPpercent.Declare(Float)
+V.Global.iCYamt.Declare(Long)
+V.Global.fCYpercent.Declare(Float)
+V.Global.iPYamt.Declare(Long)
+V.Global.fPYpercent.Declare(Float)
+V.Global.iPPYamt.Declare(Long)
+V.Global.fPPYpercent.Declare(Float)
+V.Global.iNCamt.Declare(Long)
+V.Global.fNCpercent.Declare(Float)
+V.Global.fNCcompare.Declare(Float)
+V.Global.sSQL.Declare(String)
+V.Global.sRet.Declare(String)
+V.Global.iC.Declare(Long,0)
+V.Global.dNetChgChk.Declare(Date)
+V.Global.iCPTotalAmt.Declare(Long)
+V.Global.iCYTotalAmt.Declare(Long)
+V.Global.iPYTotalAmt.Declare(Long)
+V.Global.iPPYTotalAmt.Declare(Long)
+V.Global.iNCTotalAmt.Declare(Long)
+V.Local.iIndex.Declare(Long,0)
+V.Local.sIcon.Declare(String)
+V.Local.sMonth.Declare(String)
+V.Local.sYear.Declare(String)
+V.Local.sLastRunText.Declare(String)
+
+'F.Intrinsic.String.Build("{0}\gss.ico",V.Caller.InstallDir,V.Local.sIcon)
+'Gui.FrmDtl..Icon(V.Local.sIcon)
+
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+F.Intrinsic.Control.CallSub(Subcreatetables)
+
+F.ODBC.Connection!con.OpenLocalRecordsetRO("rstFin","SELECT DISTINCT STATEMENT_NAME FROM GAB_FIN_STATE_LAYOUT;")
+F.Intrinsic.Control.DoUntil(V.ODBC.con!rstFin.EOF,=,True)
+	Gui.FrmDtl.cboFin.AddItem(V.ODBC.con!rstFin.FieldVal!STATEMENT_NAME,V.Local.iIndex)
+	F.Intrinsic.Math.Add(V.Local.iIndex,1,V.Local.iIndex)
+	F.ODBC.con!rstFin.MoveNext
+F.Intrinsic.Control.Loop
+
+'Set Months for drop down list
+F.Intrinsic.Control.For(V.Local.sMonth,1,12,1)
+	F.Intrinsic.Math.Add(V.Local.iIndex,1,V.Local.iIndex)
+	F.Intrinsic.String.Format(V.Local.sMonth,00,V.Local.sMonth)
+	Gui.FrmDtl.dropdownlistMonth.AddItem(V.Local.sMonth,V.Local.iIndex)
+F.Intrinsic.Control.Next(V.Local.sMonth)
+
+'Set Years for drop down list
+F.Intrinsic.Control.For(V.Local.sYear,2010,2199,1)
+	F.Intrinsic.Math.Add(V.Local.iIndex,1,V.Local.iIndex)
+	Gui.FrmDtl.dropdownlistYear.AddItem(V.Local.sYear,V.Local.iIndex)
+F.Intrinsic.Control.Next(V.Local.sYear)
+
+F.ODBC.Connection!con.ExecuteAndReturn("SELECT PERIOD_12_DATE FROM GAB_NET_CHANGE_TITLE WHERE MONTHS_12 = '1';",V.Global.dNetChgChk)
+F.Intrinsic.Control.If(V.Global.dNetChgChk.String,=,"","OR",V.Global.dNetChgChk.String,=,"0")
+	Gui.FrmDtl.optYes.Value(True)
+	Gui.FrmDtl.optNo.Value(False)
+	Gui.FrmDtl.optNo.Enabled(False)
+	Gui.FrmDtl.dropdownlistMonth.Enabled(True)
+	Gui.FrmDtl.dropdownlistYear.Enabled(True)
+	Gui.FrmDtl.cmdUpdate.Enabled(True)
+	Gui.FrmDtl.lblLastRun.Visible(False)
+	Gui.FrmDtl.cboFin.Enabled(False)
+	Gui.FrmDtl.cmdRun.Enabled(False)
+F.Intrinsic.Control.Else
+	Gui.FrmDtl.optYes.Value(False)
+	Gui.FrmDtl.optNo.Value(True)
+	Gui.FrmDtl.dropdownlistMonth.Enabled(False)
+	Gui.FrmDtl.dropdownlistYear.Enabled(False)
+	Gui.FrmDtl.cmdUpdate.Enabled(False)
+	Gui.FrmDtl.lblLastRun.Visible(True)
+	F.Intrinsic.String.Build("Last run selection: {0}",V.Global.dNetChgChk,V.Local.sLastRunText)
+	Gui.FrmDtl.lblLastRun.Caption(V.Local.sLastRunText)
+	Gui.FrmDtl.cboFin.Enabled(True)
+	Gui.FrmDtl.cmdRun.Enabled(True)
+F.Intrinsic.Control.EndIf
+
+Gui.FrmDtl..Show
+
+Program.Sub.Main.End
+
+Program.Sub.subRunY.Start
+V.Local.sRet.Declare(String)
+V.Local.iNClen.Declare(Long)
+V.Local.iNCSplit.Declare(Long)
+
+F.Intrinsic.Control.If(V.Global.iC,<>,1)
+	F.ODBC.Connection!con.ExecuteAndReturn("SELECT TOP 1 CP_AMOUNT,CY_AMOUNT,PY_AMOUNT,PPY_AMOUNT,NC_AMOUNT FROM GAB_FIN_STATE_DTL ORDER BY ID;",V.Local.sRet)
+	F.Intrinsic.Control.If(V.Local.sRet,<>,"")
+		F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		V.Global.iCPTotalAmt.Set(V.Local.sRet(0))
+		V.Global.iCYTotalAmt.Set(V.Local.sRet(1))
+		V.Global.iPYTotalAmt.Set(V.Local.sRet(2))
+		V.Global.iPPYTotalAmt.Set(V.Local.sRet(3))
+		V.Global.iNCTotalAmt.Set(V.Local.sRet(4))
+	F.Intrinsic.Control.EndIf
+
+	F.Intrinsic.String.Build("SELECT TITLE FROM GAB_FIN_STATE_DTL WHERE TITLE = '{0}';",V.ODBC.con!rstLayout.FieldValTrim!GROUP_NAME,V.Global.sSQL)
+	F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.sRet)
+	F.Intrinsic.Control.If(V.Global.sRet,=,"")
+		F.ODBC.Connection!con.OpenRecordsetRW("rstDtl","SELECT * FROM GAB_FIN_STATE_DTL;")
+			F.ODBC.con!rstDtl.AddNew
+				F.ODBC.con!rstDtl.Set!ID(V.Global.iC)
+				F.ODBC.con!rstDtl.Set!STATEMENT_NUM(V.ODBC.con!rstInfo.FieldVal!STATEMENT_NUM)
+				F.ODBC.con!rstDtl.Set!GROUP_ORDER(V.ODBC.con!rstLayout.FieldValLong!GROUP_ORDER)
+				F.ODBC.con!rstDtl.Set!SUB_GROUP(V.ODBC.con!rstInfo.FieldValLong!SUB_GROUP)
+				F.ODBC.con!rstDtl.Set!TITLE(V.ODBC.con!rstLayout.FieldVal!GROUP_NAME)
+			F.ODBC.con!rstDtl.Update
+			F.ODBC.con!rstDtl.Close
+			F.Intrinsic.Math.Add(V.Global.iC,1,V.Global.iC)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+'CP Amount
+	F.Intrinsic.String.Build("SELECT SUM(PERIOD_12_AMT) FROM GAB_NET_CHANGE WHERE MONTHS_12 = '1' AND GL_ACCOUNT BETWEEN '{0}' AND '{1}';",V.ODBC.con!rstInfo.FieldVal!BEG_ACCOUNT,V.ODBC.con!rstInfo.FieldVal!END_ACCOUNT,V.Global.sSQL)
+	F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iCPamt)
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		F.Intrinsic.Control.If(V.Global.iCPamt,<,0)
+			F.Intrinsic.Math.Abs(V.Global.iCPamt,V.Global.iCPamt)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+
+'CP Percent
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		V.Global.fCPpercent.Set(100)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iCPamt,V.Global.iCPTotalAmt,V.Global.fCPpercent)
+		F.Intrinsic.Math.Mult(V.Global.fCPpercent,100,V.Global.fCPpercent)
+		F.Intrinsic.Math.Round(V.Global.fCPpercent,1,V.Global.fCPpercent)
+	F.Intrinsic.Control.EndIf
+
+'CY Amount
+	F.Intrinsic.String.Build("SELECT SUM(PERIOD_1_AMT+PERIOD_2_AMT+PERIOD_3_AMT+PERIOD_4_AMT+PERIOD_5_AMT+PERIOD_6_AMT+PERIOD_7_AMT+PERIOD_8_AMT+PERIOD_9_AMT+PERIOD_10_AMT+PERIOD_11_AMT+PERIOD_12_AMT) FROM GAB_NET_CHANGE WHERE MONTHS_12 = '1' AND GL_ACCOUNT BETWEEN '{0}' AND '{1}';",V.ODBC.con!rstInfo.FieldVal!BEG_ACCOUNT,V.ODBC.con!rstInfo.FieldVal!END_ACCOUNT,V.Global.sSQL)
+	F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iCYamt)
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		F.Intrinsic.Control.If(V.Global.iCYamt,<,0)
+			F.Intrinsic.Math.Abs(V.Global.iCYamt,V.Global.iCYamt)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+
+'CY Percent
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		V.Global.fCYpercent.Set(100)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iCYamt,V.Global.iCYTotalAmt,V.Global.fCYpercent)
+		F.Intrinsic.Math.Mult(V.Global.fCYpercent,100,V.Global.fCYpercent)
+		F.Intrinsic.Math.Round(V.Global.fCYpercent,1,V.Global.fCYpercent)
+	F.Intrinsic.Control.EndIf
+
+'PY Amount
+	F.Intrinsic.String.Build("SELECT SUM(PERIOD_1_AMT+PERIOD_2_AMT+PERIOD_3_AMT+PERIOD_4_AMT+PERIOD_5_AMT+PERIOD_6_AMT+PERIOD_7_AMT+PERIOD_8_AMT+PERIOD_9_AMT+PERIOD_10_AMT+PERIOD_11_AMT+PERIOD_12_AMT) FROM GAB_NET_CHANGE WHERE MONTHS_12 = '2' AND GL_ACCOUNT BETWEEN '{0}' AND '{1}';",V.ODBC.con!rstInfo.FieldVal!BEG_ACCOUNT,V.ODBC.con!rstInfo.FieldVal!END_ACCOUNT,V.Global.sSQL)
+	F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iPYamt)
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		F.Intrinsic.Control.If(V.Global.iPYamt,<,0)
+			F.Intrinsic.Math.Abs(V.Global.iPYamt,V.Global.iPYamt)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+
+'PY Percent
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		V.Global.fPYpercent.Set(100)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iPYamt,V.Global.iPYTotalAmt,V.Global.fPYpercent)
+		F.Intrinsic.Math.Mult(V.Global.fPYpercent,100,V.Global.fPYpercent)
+		F.Intrinsic.Math.Round(V.Global.fPYpercent,1,V.Global.fPYpercent)
+	F.Intrinsic.Control.EndIf
+
+'PPY Amount
+	F.Intrinsic.String.Build("SELECT SUM(PERIOD_1_AMT+PERIOD_2_AMT+PERIOD_3_AMT+PERIOD_4_AMT+PERIOD_5_AMT+PERIOD_6_AMT+PERIOD_7_AMT+PERIOD_8_AMT+PERIOD_9_AMT+PERIOD_10_AMT+PERIOD_11_AMT+PERIOD_12_AMT) FROM GAB_NET_CHANGE WHERE MONTHS_12 = '3' AND GL_ACCOUNT BETWEEN '{0}' AND '{1}';",V.ODBC.con!rstInfo.FieldVal!BEG_ACCOUNT,V.ODBC.con!rstInfo.FieldVal!END_ACCOUNT,V.Global.sSQL)
+	F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iPPYamt)
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		F.Intrinsic.Control.If(V.Global.iPPYamt,<,0)
+			F.Intrinsic.Math.Abs(V.Global.iPPYamt,V.Global.iPPYamt)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+
+'PPY Percent
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		V.Global.fPYpercent.Set(100)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iPPYamt,V.Global.iPPYTotalAmt,V.Global.fPPYpercent)
+		F.Intrinsic.Math.Mult(V.Global.fPPYpercent,100,V.Global.fPPYpercent)
+		F.Intrinsic.Math.Round(V.Global.fPPYpercent,1,V.Global.fPPYpercent)
+	F.Intrinsic.Control.EndIf
+
+'NC Amount
+	F.Intrinsic.Math.Sub(V.Global.iCYamt,V.Global.iPYamt,V.Global.iNCamt)
+
+'NC Percent
+	F.Intrinsic.Control.If(V.Global.iPYamt,=,0)
+		V.Global.fNCpercent.Set(0)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iCYamt,V.Global.iPYamt,V.Global.fNCpercent)
+		F.Intrinsic.Math.Sub(V.Global.fNCpercent,1,V.Global.fNCpercent)
+		F.Intrinsic.Math.Mult(V.Global.fNCpercent,100,V.Global.fNCpercent)
+		F.Intrinsic.Math.Round(V.Global.fNCpercent,1,V.Global.fNCpercent)
+		F.Intrinsic.String.Split(V.Global.fNCpercent,".",V.Local.iNCSplit)
+		F.Intrinsic.String.Len(V.Local.iNCSplit(0),V.Local.iNClen)
+		F.Intrinsic.Control.If(V.Local.iNClen,>=,4)
+			V.Global.fNCpercent.Set(999.9)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+
+'NC Percent Compare
+	F.Intrinsic.Math.Sub(V.Global.fCYpercent,V.Global.fPYpercent,V.Global.fNCcompare)
+
+F.ODBC.Connection!con.OpenRecordsetRW("rstDtl","SELECT * FROM GAB_FIN_STATE_DTL;")
+F.ODBC.con!rstDtl.AddNew
+	F.ODBC.con!rstDtl.Set!ID(V.Global.iC)
+	F.ODBC.con!rstDtl.Set!STATEMENT_NUM(V.ODBC.con!rstInfo.FieldVal!STATEMENT_NUM)
+	F.ODBC.con!rstDtl.Set!GROUP_ORDER(V.ODBC.con!rstLayout.FieldValLong!GROUP_ORDER)
+	F.ODBC.con!rstDtl.Set!SUB_GROUP(V.ODBC.con!rstInfo.FieldValLong!SUB_GROUP)
+	V.Local.sTitle.Declare(String)
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		F.Intrinsic.String.Build("{0}",V.ODBC.con!rstInfo.FieldVal!TITLE,V.Local.sTitle)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("   {0}",V.ODBC.con!rstInfo.FieldVal!TITLE,V.Local.sTitle)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rstDtl.Set!TITLE(V.Local.sTitle)
+	F.ODBC.con!rstDtl.Set!CP_AMOUNT(V.Global.iCPamt)
+	F.ODBC.con!rstDtl.Set!CP_PERCENT(V.Global.fCPpercent)
+	F.ODBC.con!rstDtl.Set!CY_AMOUNT(V.Global.iCYamt)
+	F.ODBC.con!rstDtl.Set!CY_PERCENT(V.Global.fCYpercent)
+	F.ODBC.con!rstDtl.Set!PY_AMOUNT(V.Global.iPYamt)
+	F.ODBC.con!rstDtl.Set!PY_PERCENT(V.Global.fPYpercent)
+	F.ODBC.con!rstDtl.Set!PPY_AMOUNT(V.Global.iPPYamt)
+	F.ODBC.con!rstDtl.Set!PPY_PERCENT(V.Global.fPPYpercent)
+	F.ODBC.con!rstDtl.Set!NC_AMOUNT(V.Global.iNCamt)
+	F.ODBC.con!rstDtl.Set!NC_PERCENT(V.Global.fNCpercent)
+	F.ODBC.con!rstDtl.Set!NC_PERCENT_COMPARE(V.Global.fNCcompare)
+F.ODBC.con!rstDtl.Update
+F.ODBC.con!rstDtl.Close
+
+F.Intrinsic.Control.ExitSub
+
+
+Program.Sub.subRunY.End
+
+Program.Sub.subRunA.Start
+V.Local.iRet.Declare(Long)
+V.Local.sRet.Declare(String)
+V.Local.sSplit1.Declare(String)
+V.Local.sSplit2.Declare(String)
+V.Local.sUdt.Declare(String)
+V.Local.iCnt.Declare(Long)
+V.Local.iC.Declare(Long,-1)
+V.Local.iCPamtTotal.Declare(Long)
+V.Local.iCYamtTotal.Declare(Long)
+V.Local.iPYamtTotal.Declare(Long)
+V.Local.iPPYamtTotal.Declare(Long)
+V.Local.iNCamtTotal.Declare(Long)
+V.Local.iNClen.Declare(Long)
+V.Local.iNCSplit.Declare(Long)
+
+V.uGlobal.uAddSub.Redim(-1,-1)
+
+F.Intrinsic.String.Split(V.ODBC.con!rstInfo.FieldVal!BEG_ACCOUNT,",",V.Local.sSplit1)
+F.Intrinsic.Control.For(V.Local.iCnt,0,V.Local.sSplit1.UBound,1)
+	F.Intrinsic.String.Split(V.Local.sSplit1(V.Local.iCnt),"-",V.Local.sSplit2)
+	F.Intrinsic.Control.If(V.Local.sSplit1.UBound,=,0)
+		'CP Amount
+			F.Intrinsic.String.Build("SELECT SUM(CP_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iCPamt)
+		'CY Amount
+			F.Intrinsic.String.Build("SELECT SUM(CY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iCYamt)
+		'PY Amount
+			F.Intrinsic.String.Build("SELECT SUM(PY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iPYamt)
+		'PPY Amount
+			F.Intrinsic.String.Build("SELECT SUM(PPY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iPPYamt)
+		'NC Amount
+			F.Intrinsic.String.Build("SELECT SUM(NY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.Intrinsic.Math.Sub(V.Global.iCYamt,V.Global.iPYamt,V.Global.iNCamt)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Control.If(V.Local.iC,=,-1)
+			F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+		F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.If(V.Local.iC,=,0)
+			V.uGlobal.uAddSub.Redim(0,0)
+		F.Intrinsic.Control.Else
+			V.uGlobal.uAddSub.RedimPreserve(0,V.Local.iC)
+		F.Intrinsic.Control.EndIf
+		'CP Amount
+			F.Intrinsic.String.Build("SELECT SUM(CP_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iCPamt)
+			V.uGlobal.uAddSub(V.Local.iC)!TYPE.Set("CP")
+			V.uGlobal.uAddSub(V.Local.iC)!VALUE.Set(V.Global.iCPamt)
+			F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+			V.uGlobal.uAddSub.RedimPreserve(0,V.Local.iC)
+		'CY Amount
+			F.Intrinsic.String.Build("SELECT SUM(CY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iCYamt)
+			V.uGlobal.uAddSub(V.Local.iC)!TYPE.Set("CY")
+			V.uGlobal.uAddSub(V.Local.iC)!VALUE.Set(V.Global.iCYamt)
+			F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+			V.uGlobal.uAddSub.RedimPreserve(0,V.Local.iC)
+		'PY Amount
+			F.Intrinsic.String.Build("SELECT SUM(PY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iPYamt)
+			V.uGlobal.uAddSub(V.Local.iC)!TYPE.Set("PY")
+			V.uGlobal.uAddSub(V.Local.iC)!VALUE.Set(V.Global.iPYamt)
+			F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+			V.uGlobal.uAddSub.RedimPreserve(0,V.Local.iC)
+		'PPY Amount
+			F.Intrinsic.String.Build("SELECT SUM(PPY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iPPYamt)
+			V.uGlobal.uAddSub(V.Local.iC)!TYPE.Set("PPY")
+			V.uGlobal.uAddSub(V.Local.iC)!VALUE.Set(V.Global.iPPYamt)
+			F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+			V.uGlobal.uAddSub.RedimPreserve(0,V.Local.iC)
+		'NC Amount
+			F.Intrinsic.String.Build("SELECT SUM(NY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.Intrinsic.Math.Sub(V.Global.iCYamt,V.Global.iPYamt,V.Global.iNCamt)
+			V.uGlobal.uAddSub(V.Local.iC)!TYPE.Set("NC")
+			V.uGlobal.uAddSub(V.Local.iC)!VALUE.Set(V.Global.iNCamt)
+			F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.iCnt)
+
+F.Intrinsic.Control.If(V.Local.sSplit1.UBound,<>,0)
+	V.Local.iCnt.Set(0)
+	'CP Amount
+		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uAddSub!TYPE,"CP",V.Local.sUdt)
+		F.Intrinsic.String.Split(V.Local.sUdt,"*!*",V.Local.sRet)
+			F.Intrinsic.Control.For(V.Local.iCnt,0,V.Local.sRet.UBound,1)
+				F.Intrinsic.Math.Add(V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE,V.Local.iCPamtTotal,V.Local.iCPamtTotal)
+			F.Intrinsic.Control.Next(V.Local.iCnt)
+		V.Global.iCPamt.Set(V.Local.iCPamtTotal)
+		V.Local.iCnt.Set(0)
+	'CY Amount
+		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uAddSub!TYPE,"CY",V.Local.sUdt)
+		F.Intrinsic.String.Split(V.Local.sUdt,"*!*",V.Local.sRet)
+			F.Intrinsic.Control.For(V.Local.iCnt,0,V.Local.sRet.UBound,1)
+				F.Intrinsic.Math.Add(V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE,V.Local.iCYamtTotal,V.Local.iCYamtTotal)
+			F.Intrinsic.Control.Next(V.Local.iCnt)
+		V.Global.iCYamt.Set(V.Local.iCYamtTotal)
+		V.Local.iCnt.Set(0)
+	'PY Amount
+		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uAddSub!TYPE,"PY",V.Local.sUdt)
+		F.Intrinsic.String.Split(V.Local.sUdt,"*!*",V.Local.sRet)
+			F.Intrinsic.Control.For(V.Local.iCnt,0,V.Local.sRet.UBound,1)
+				F.Intrinsic.Math.Add(V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE,V.Local.iPYamtTotal,V.Local.iPYamtTotal)
+			F.Intrinsic.Control.Next(V.Local.iCnt)
+		V.Global.iPYamt.Set(V.Local.iPYamtTotal)
+		V.Local.iCnt.Set(0)
+	'PPY Amount
+		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uAddSub!TYPE,"PPY",V.Local.sUdt)
+		F.Intrinsic.String.Split(V.Local.sUdt,"*!*",V.Local.sRet)
+			F.Intrinsic.Control.For(V.Local.iCnt,0,V.Local.sRet.UBound,1)
+				F.Intrinsic.Math.Add(V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE,V.Local.iPPYamtTotal,V.Local.iPPYamtTotal)
+			F.Intrinsic.Control.Next(V.Local.iCnt)
+		V.Global.iPPYamt.Set(V.Local.iPPYamtTotal)
+		V.Local.iCnt.Set(0)
+	'NC Amount
+		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uAddSub!TYPE,"NC",V.Local.sUdt)
+		F.Intrinsic.String.Split(V.Local.sUdt,"*!*",V.Local.sRet)
+			F.Intrinsic.Control.For(V.Local.iCnt,0,V.Local.sRet.UBound,1)
+				F.Intrinsic.Math.Add(V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE,V.Local.iNCamtTotal,V.Local.iNCamtTotal)
+			F.Intrinsic.Control.Next(V.Local.iCnt)
+		V.Global.iNCamt.Set(V.Local.iNCamtTotal)
+		V.Local.iCnt.Set(0)
+F.Intrinsic.Control.EndIf
+
+'CP Percent
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		V.Global.fCPpercent.Set(100)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iCPamt,V.Global.iCPTotalAmt,V.Global.fCPpercent)
+		F.Intrinsic.Math.Mult(V.Global.fCPpercent,100,V.Global.fCPpercent)
+		F.Intrinsic.Math.Round(V.Global.fCPpercent,1,V.Global.fCPpercent)
+	F.Intrinsic.Control.EndIf
+
+'CY Percent
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		V.Global.fCYpercent.Set(100)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iCYamt,V.Global.iCYTotalAmt,V.Global.fCYpercent)
+		F.Intrinsic.Math.Mult(V.Global.fCYpercent,100,V.Global.fCYpercent)
+		F.Intrinsic.Math.Round(V.Global.fCYpercent,1,V.Global.fCYpercent)
+	F.Intrinsic.Control.EndIf
+
+'PY Percent
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		V.Global.fPYpercent.Set(100)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iPYamt,V.Global.iPYTotalAmt,V.Global.fPYpercent)
+		F.Intrinsic.Math.Mult(V.Global.fPYpercent,100,V.Global.fPYpercent)
+		F.Intrinsic.Math.Round(V.Global.fPYpercent,1,V.Global.fPYpercent)
+	F.Intrinsic.Control.EndIf
+
+'PPY Percent
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		V.Global.fPPYpercent.Set(100)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iPPYamt,V.Global.iPPYTotalAmt,V.Global.fPPYpercent)
+		F.Intrinsic.Math.Mult(V.Global.fPYpercent,100,V.Global.fPPYpercent)
+		F.Intrinsic.Math.Round(V.Global.fPPYpercent,1,V.Global.fPPYpercent)
+		F.Intrinsic.String.Split(V.Global.fPPYpercent,".",V.Local.iNCSplit)
+		F.Intrinsic.String.Len(V.Local.iNCSplit(0),V.Local.iNClen)
+		F.Intrinsic.Control.If(V.Local.iNClen,>=,4)
+			V.Global.fPPYpercent.Set(999.9)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+
+'NC Percent
+	F.Intrinsic.Control.If(V.Global.iPYamt,=,0)
+		V.Global.fNCpercent.Set(0)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iCYamt,V.Global.iPYamt,V.Global.fNCpercent)
+		F.Intrinsic.Math.Sub(V.Global.fNCpercent,1,V.Global.fNCpercent)
+		F.Intrinsic.Math.Mult(V.Global.fNCpercent,100,V.Global.fNCpercent)
+		F.Intrinsic.Math.Round(V.Global.fNCpercent,1,V.Global.fNCpercent)
+'		F.Intrinsic.String.Len(V.Global.fNCpercent,V.Local.iNClen)
+		F.Intrinsic.String.Split(V.Global.fNCpercent,".",V.Local.iNCSplit)
+		F.Intrinsic.String.Len(V.Local.iNCSplit(0),V.Local.iNClen)
+		F.Intrinsic.Control.If(V.Local.iNClen,>=,4)
+			V.Global.fNCpercent.Set(999.9)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+
+'NC Percent Compare
+	F.Intrinsic.Math.Sub(V.Global.fCYpercent,V.Global.fPYpercent,V.Global.fNCcompare)
+
+F.ODBC.Connection!con.OpenRecordsetRW("rstDtl","SELECT * FROM GAB_FIN_STATE_DTL;")
+F.ODBC.con!rstDtl.AddNew
+	F.ODBC.con!rstDtl.Set!ID(V.Global.iC)
+	F.ODBC.con!rstDtl.Set!STATEMENT_NUM(V.ODBC.con!rstInfo.FieldVal!STATEMENT_NUM)
+	F.ODBC.con!rstDtl.Set!GROUP_ORDER(V.ODBC.con!rstLayout.FieldValLong!GROUP_ORDER)
+	F.ODBC.con!rstDtl.Set!SUB_GROUP(V.ODBC.con!rstInfo.FieldValLong!SUB_GROUP)
+	V.Local.sTitle.Declare(String)
+	V.Local.sTitle.Set(V.ODBC.con!rstInfo.FieldValTrim!TITLE)
+	F.Intrinsic.Control.If(V.ODBC.con!rstInfo.FieldValTrim!TITLE,=,V.Local.sTitle.UCase)
+			F.ODBC.con!rstDtl.Set!TITLE(V.ODBC.con!rstInfo.FieldVal!TITLE)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("      {0}",V.ODBC.con!rstInfo.FieldVal!TITLE,V.Local.sTitle)
+		F.ODBC.con!rstDtl.Set!TITLE(V.Local.sTitle)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rstDtl.Set!CP_AMOUNT(V.Global.iCPamt)
+	F.ODBC.con!rstDtl.Set!CP_PERCENT(V.Global.fCPpercent)
+	F.ODBC.con!rstDtl.Set!CY_AMOUNT(V.Global.iCYamt)
+	F.ODBC.con!rstDtl.Set!CY_PERCENT(V.Global.fCYpercent)
+	F.ODBC.con!rstDtl.Set!PY_AMOUNT(V.Global.iPYamt)
+	F.ODBC.con!rstDtl.Set!PY_PERCENT(V.Global.fPYpercent)
+	F.ODBC.con!rstDtl.Set!PPY_AMOUNT(V.Global.iPPYamt)
+	F.ODBC.con!rstDtl.Set!PPY_PERCENT(V.Global.fPPYpercent)
+	F.ODBC.con!rstDtl.Set!NC_AMOUNT(V.Global.iNCamt)
+	F.ODBC.con!rstDtl.Set!NC_PERCENT(V.Global.fNCpercent)
+	F.ODBC.con!rstDtl.Set!NC_PERCENT_COMPARE(V.Global.fNCcompare)
+F.ODBC.con!rstDtl.Update
+F.ODBC.con!rstDtl.Close
+
+F.Intrinsic.Control.ExitSub
+
+
+Program.Sub.subRunA.End
+
+Program.Sub.subRunS.Start
+V.Local.iRet.Declare(Long)
+V.Local.sRet.Declare(String)
+V.Local.sSplit1.Declare(String)
+V.Local.sSplit2.Declare(String)
+V.Local.sUdt.Declare(String)
+V.Local.iCnt.Declare(Long)
+V.Local.iC.Declare(Long,-1)
+V.Local.iCPamtTotal.Declare(Long)
+V.Local.iCYamtTotal.Declare(Long)
+V.Local.iPYamtTotal.Declare(Long)
+V.Local.iPPYamtTotal.Declare(Long)
+V.Local.iNCamtTotal.Declare(Long)
+V.Local.iNClen.Declare(Long)
+V.Local.iNCSplit.Declare(Long)
+
+V.uGlobal.uAddSub.Redim(-1,-1)
+
+F.Intrinsic.String.Split(V.ODBC.con!rstInfo.FieldVal!BEG_ACCOUNT,",",V.Local.sSplit1)
+F.Intrinsic.Control.For(V.Local.iCnt,0,V.Local.sSplit1.UBound,1)
+	F.Intrinsic.String.Split(V.Local.sSplit1(V.Local.iCnt),"-",V.Local.sSplit2)
+	F.Intrinsic.Control.If(V.Local.sSplit1.UBound,=,0)
+		'CP Amount
+			F.Intrinsic.String.Build("SELECT SUM(CP_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iCPamt)
+		'CY Amount
+			F.Intrinsic.String.Build("SELECT SUM(CY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iCYamt)
+		'PY Amount
+			F.Intrinsic.String.Build("SELECT SUM(PY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iPYamt)
+		'PPY Amount
+			F.Intrinsic.String.Build("SELECT SUM(PPY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iPPYamt)
+		'NC Amount
+			F.Intrinsic.String.Build("SELECT SUM(NY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.Intrinsic.Math.Sub(V.Global.iCYamt,V.Global.iPYamt,V.Global.iNCamt)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Control.If(V.Local.iC,=,-1)
+			F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+		F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.If(V.Local.iC,=,0)
+			V.uGlobal.uAddSub.Redim(0,0)
+		F.Intrinsic.Control.Else
+			V.uGlobal.uAddSub.RedimPreserve(0,V.Local.iC)
+		F.Intrinsic.Control.EndIf
+		'CP Amount
+			F.Intrinsic.String.Build("SELECT SUM(CP_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iCPamt)
+			V.uGlobal.uAddSub(V.Local.iC)!TYPE.Set("CP")
+			V.uGlobal.uAddSub(V.Local.iC)!VALUE.Set(V.Global.iCPamt)
+			F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+			V.uGlobal.uAddSub.RedimPreserve(0,V.Local.iC)
+		'CY Amount
+			F.Intrinsic.String.Build("SELECT SUM(CY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iCYamt)
+			V.uGlobal.uAddSub(V.Local.iC)!TYPE.Set("CY")
+			V.uGlobal.uAddSub(V.Local.iC)!VALUE.Set(V.Global.iCYamt)
+			F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+			V.uGlobal.uAddSub.RedimPreserve(0,V.Local.iC)
+		'PY Amount
+			F.Intrinsic.String.Build("SELECT SUM(PY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iPYamt)
+			V.uGlobal.uAddSub(V.Local.iC)!TYPE.Set("PY")
+			V.uGlobal.uAddSub(V.Local.iC)!VALUE.Set(V.Global.iPYamt)
+			F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+			V.uGlobal.uAddSub.RedimPreserve(0,V.Local.iC)
+		'PPY Amount
+			F.Intrinsic.String.Build("SELECT SUM(PPY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.iPPYamt)
+			V.uGlobal.uAddSub(V.Local.iC)!TYPE.Set("PPY")
+			V.uGlobal.uAddSub(V.Local.iC)!VALUE.Set(V.Global.iPPYamt)
+			F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+			V.uGlobal.uAddSub.RedimPreserve(0,V.Local.iC)
+		'NC Amount
+			F.Intrinsic.String.Build("SELECT SUM(NY_AMOUNT) FROM GAB_FIN_STATE_DTL WHERE GROUP_ORDER = '{0}' AND SUB_GROUP = '{1}';",V.Local.sSplit2(0),V.Local.sSplit2(1),V.Global.sSQL)
+			F.Intrinsic.Math.Sub(V.Global.iCYamt,V.Global.iPYamt,V.Global.iNCamt)
+			V.uGlobal.uAddSub(V.Local.iC)!TYPE.Set("NC")
+			V.uGlobal.uAddSub(V.Local.iC)!VALUE.Set(V.Global.iNCamt)
+			F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.iCnt)
+
+F.Intrinsic.Control.If(V.Local.sSplit1.UBound,<>,0)
+	V.Local.iCnt.Set(0)
+	'CP Amount
+		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uAddSub!TYPE,"CP",V.Local.sUdt)
+		F.Intrinsic.String.Split(V.Local.sUdt,"*!*",V.Local.sRet)
+			F.Intrinsic.Control.For(V.Local.iCnt,0,V.Local.sRet.UBound,1)
+				F.Intrinsic.Control.If(V.Local.iCnt,=,0)
+					V.Local.iCPamtTotal.Set(V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE)
+				F.Intrinsic.Control.Else
+					F.Intrinsic.Math.Sub(V.Local.iCPamtTotal,V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE,V.Local.iCPamtTotal)
+				F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.Next(V.Local.iCnt)
+		V.Global.iCPamt.Set(V.Local.iCPamtTotal)
+		V.Local.iCnt.Set(0)
+	'CY Amount
+		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uAddSub!TYPE,"CY",V.Local.sUdt)
+		F.Intrinsic.String.Split(V.Local.sUdt,"*!*",V.Local.sRet)
+			F.Intrinsic.Control.For(V.Local.iCnt,0,V.Local.sRet.UBound,1)
+				F.Intrinsic.Control.If(V.Local.iCnt,=,0)
+					V.Local.iCYamtTotal.Set(V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE)
+				F.Intrinsic.Control.Else
+					F.Intrinsic.Math.Sub(V.Local.iCYamtTotal,V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE,V.Local.iCYamtTotal)
+				F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.Next(V.Local.iCnt)
+		V.Global.iCYamt.Set(V.Local.iCYamtTotal)
+		V.Local.iCnt.Set(0)
+	'PY Amount
+		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uAddSub!TYPE,"PY",V.Local.sUdt)
+		F.Intrinsic.String.Split(V.Local.sUdt,"*!*",V.Local.sRet)
+			F.Intrinsic.Control.For(V.Local.iCnt,0,V.Local.sRet.UBound,1)
+				F.Intrinsic.Control.If(V.Local.iCnt,=,0)
+					V.Local.iPYamtTotal.Set(V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE)
+				F.Intrinsic.Control.Else
+					F.Intrinsic.Math.Sub(V.Local.iPYamtTotal,V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE,V.Local.iPYamtTotal)
+				F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.Next(V.Local.iCnt)
+		V.Global.iPYamt.Set(V.Local.iPYamtTotal)
+		V.Local.iCnt.Set(0)
+	'PPY Amount
+		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uAddSub!TYPE,"PPY",V.Local.sUdt)
+		F.Intrinsic.String.Split(V.Local.sUdt,"*!*",V.Local.sRet)
+			F.Intrinsic.Control.For(V.Local.iCnt,0,V.Local.sRet.UBound,1)
+				F.Intrinsic.Control.If(V.Local.iCnt,=,0)
+					V.Local.iPPYamtTotal.Set(V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE)
+				F.Intrinsic.Control.Else
+					F.Intrinsic.Math.Sub(V.Local.iPPYamtTotal,V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE,V.Local.iPPYamtTotal)
+				F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.Next(V.Local.iCnt)
+		V.Global.iPPYamt.Set(V.Local.iPPYamtTotal)
+		V.Local.iCnt.Set(0)
+	'NC Amount
+		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uAddSub!TYPE,"NC",V.Local.sUdt)
+		F.Intrinsic.String.Split(V.Local.sUdt,"*!*",V.Local.sRet)
+			F.Intrinsic.Control.For(V.Local.iCnt,0,V.Local.sRet.UBound,1)
+				F.Intrinsic.Control.If(V.Local.iCnt,=,0)
+					V.Local.iNCamtTotal.Set(V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE)
+				F.Intrinsic.Control.Else
+					F.Intrinsic.Math.Sub(V.Local.iNCamtTotal,V.uGlobal.uAddSub(V.Local.sRet(V.Local.iCnt))!VALUE,V.Local.iNCamtTotal)
+				F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.Next(V.Local.iCnt)
+		V.Global.iNCamt.Set(V.Local.iNCamtTotal)
+		V.Local.iCnt.Set(0)
+F.Intrinsic.Control.EndIf
+
+'CP Percent
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		V.Global.fCPpercent.Set(100)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iCPamt,V.Global.iCPTotalAmt,V.Global.fCPpercent)
+		F.Intrinsic.Math.Mult(V.Global.fCPpercent,100,V.Global.fCPpercent)
+		F.Intrinsic.Math.Round(V.Global.fCPpercent,1,V.Global.fCPpercent)
+	F.Intrinsic.Control.EndIf
+
+'CY Percent
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		V.Global.fCYpercent.Set(100)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iCYamt,V.Global.iCYTotalAmt,V.Global.fCYpercent)
+		F.Intrinsic.Math.Mult(V.Global.fCYpercent,100,V.Global.fCYpercent)
+		F.Intrinsic.Math.Round(V.Global.fCYpercent,1,V.Global.fCYpercent)
+	F.Intrinsic.Control.EndIf
+
+'PY Percent
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		V.Global.fPYpercent.Set(100)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iPYamt,V.Global.iPYTotalAmt,V.Global.fPYpercent)
+		F.Intrinsic.Math.Mult(V.Global.fPYpercent,100,V.Global.fPYpercent)
+		F.Intrinsic.Math.Round(V.Global.fPYpercent,1,V.Global.fPYpercent)
+	F.Intrinsic.Control.EndIf
+
+'PPY Percent
+	F.Intrinsic.Control.If(V.Global.iC,=,1)
+		V.Global.fPPYpercent.Set(100)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iPPYamt,V.Global.iPPYTotalAmt,V.Global.fPPYpercent)
+		F.Intrinsic.Math.Mult(V.Global.fPPYpercent,100,V.Global.fPPYpercent)
+		F.Intrinsic.Math.Round(V.Global.fPPYpercent,1,V.Global.fPPYpercent)
+	F.Intrinsic.Control.EndIf
+
+'NC Percent
+	F.Intrinsic.Control.If(V.Global.iPYamt,=,0)
+		V.Global.fNCpercent.Set(0)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Math.Div(V.Global.iCYamt,V.Global.iPYamt,V.Global.fNCpercent)
+		F.Intrinsic.Math.Sub(V.Global.fNCpercent,1,V.Global.fNCpercent)
+		F.Intrinsic.Math.Mult(V.Global.fNCpercent,100,V.Global.fNCpercent)
+		F.Intrinsic.Math.Round(V.Global.fNCpercent,1,V.Global.fNCpercent)
+		F.Intrinsic.String.Len(V.Global.fNCpercent,V.Local.iNClen)
+		F.Intrinsic.String.Split(V.Global.fNCpercent,".",V.Local.iNCSplit)
+		F.Intrinsic.String.Len(V.Local.iNCSplit(0),V.Local.iNClen)
+		F.Intrinsic.Control.If(V.Local.iNClen,>=,4)
+			V.Global.fNCpercent.Set(999.9)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+
+'NC Percent Compare
+	F.Intrinsic.Math.Sub(V.Global.fCYpercent,V.Global.fPYpercent,V.Global.fNCcompare)
+
+F.ODBC.Connection!con.OpenRecordsetRW("rstDtl","SELECT * FROM GAB_FIN_STATE_DTL;")
+F.ODBC.con!rstDtl.AddNew
+	F.ODBC.con!rstDtl.Set!ID(V.Global.iC)
+	F.ODBC.con!rstDtl.Set!STATEMENT_NUM(V.ODBC.con!rstInfo.FieldVal!STATEMENT_NUM)
+	F.ODBC.con!rstDtl.Set!GROUP_ORDER(V.ODBC.con!rstLayout.FieldValLong!GROUP_ORDER)
+	F.ODBC.con!rstDtl.Set!SUB_GROUP(V.ODBC.con!rstInfo.FieldValLong!SUB_GROUP)
+	V.Local.sTitle.Declare(String)
+	V.Local.sTitle.Set(V.ODBC.con!rstInfo.FieldValTrim!TITLE)
+	F.Intrinsic.Control.If(V.ODBC.con!rstInfo.FieldValTrim!TITLE,=,V.Local.sTitle.UCase)
+			F.ODBC.con!rstDtl.Set!TITLE(V.ODBC.con!rstInfo.FieldVal!TITLE)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("      {0}",V.ODBC.con!rstInfo.FieldVal!TITLE,V.Local.sTitle)
+		F.ODBC.con!rstDtl.Set!TITLE(V.Local.sTitle)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rstDtl.Set!CP_AMOUNT(V.Global.iCPamt)
+	F.ODBC.con!rstDtl.Set!CP_PERCENT(V.Global.fCPpercent)
+	F.ODBC.con!rstDtl.Set!CY_AMOUNT(V.Global.iCYamt)
+	F.ODBC.con!rstDtl.Set!CY_PERCENT(V.Global.fCYpercent)
+	F.ODBC.con!rstDtl.Set!PY_AMOUNT(V.Global.iPYamt)
+	F.ODBC.con!rstDtl.Set!PY_PERCENT(V.Global.fPYpercent)
+	F.ODBC.con!rstDtl.Set!PPY_AMOUNT(V.Global.iPPYamt)
+	F.ODBC.con!rstDtl.Set!PPY_PERCENT(V.Global.fPPYpercent)
+	F.ODBC.con!rstDtl.Set!NC_AMOUNT(V.Global.iNCamt)
+	F.ODBC.con!rstDtl.Set!NC_PERCENT(V.Global.fNCpercent)
+	F.ODBC.con!rstDtl.Set!NC_PERCENT_COMPARE(V.Global.fNCcompare)
+F.ODBC.con!rstDtl.Update
+F.ODBC.con!rstDtl.Close
+
+F.Intrinsic.Control.ExitSub
+
+Program.Sub.subRunS.End
+
+Program.Sub.cmdRun_click.Start
+V.Local.sTitle.Declare(String)
+V.Local.iStatementNum.Declare(Long)
+V.Local.iGroupOrder.Declare(Long)
+V.Local.iSubgroup.Declare(Long)
+V.Local.iProCnt.Declare(Long,0)
+V.Local.iProgTotal.Declare(Long)
+
+Gui.FrmDtl.cmdRun.Enabled(False)
+
+F.Intrinsic.Math.Add(V.Screen.FrmDtl!cboFin.ListIndex,1,V.Local.iStatementNum)
+
+F.Intrinsic.Control.If(V.Local.iStatementNum,<>,0)
+	Gui.FrmDtl.progressDtl.Visible(True)
+
+	F.ODBC.Connection!con.Execute("DELETE FROM GAB_FIN_STATE_DTL;")
+
+	F.Intrinsic.String.Build("SELECT COUNT(*) FROM GAB_FIN_STATE_INFO WHERE STATEMENT_NUM = '{0}';",V.Local.iStatementNum,V.Global.sSQL)
+	F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Local.iProgTotal)
+
+	F.Intrinsic.String.Build("SELECT * FROM GAB_FIN_STATE_INFO WHERE STATEMENT_NUM = '{0}' ORDER BY 1;",V.Local.iStatementNum,V.Global.sSQL)
+	F.ODBC.Connection!con.OpenRecordsetRO("rstInfo",V.Global.sSQL)
+	F.Intrinsic.String.Build("SELECT * FROM GAB_FIN_STATE_LAYOUT WHERE STATEMENT_NUM = '{0}' ORDER BY 1;",V.Local.iStatementNum,V.Global.sSQL)
+	F.ODBC.Connection!con.OpenRecordsetRO("rstLayout",V.Global.sSQL)
+		F.Intrinsic.Control.DoUntil(V.ODBC.con!rstLayout.EOF,=,True)
+			F.Intrinsic.Control.DoUntil(V.ODBC.con!rstLayout.FieldVal!GROUP_ORDER,<>,V.ODBC.con!rstInfo.FieldVal!GROUP_ORDER)
+				F.Intrinsic.Math.Add(V.Global.iC,1,V.Global.iC)
+				F.Intrinsic.Math.Add(V.Local.iProCnt,1,V.Local.iProCnt)
+				Gui.FrmDtl.progressDtl.Value(V.Local.iProCnt)
+
+				V.Local.sTitle.Set(V.ODBC.con!rstInfo.FieldVal!TITLE)
+				V.Local.iGroupOrder.Set(V.ODBC.con!rstInfo.FieldVal!GROUP_ORDER)
+				V.Local.iSubgroup.Set(V.ODBC.con!rstInfo.FieldVal!SUB_GROUP)
+
+				F.Intrinsic.String.Build("SELECT FLAG_TOTAL FROM GAB_FIN_STATE_INFO WHERE TITLE = '{0}' AND STATEMENT_NUM = '{1}' AND GROUP_ORDER = '{2}' AND SUB_GROUP = '{3}';",V.Local.sTitle,V.Local.iStatementNum,V.Local.iGroupOrder,V.Local.iSubgroup,V.Global.sSQL)
+				F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Global.sRet)
+				F.Intrinsic.Control.If(V.Global.sRet,=,"Y")
+					F.Intrinsic.Control.CallSub(Subruny)
+				F.Intrinsic.Control.ElseIf(V.Global.sRet,=,"A")
+					F.Intrinsic.Control.CallSub(Subruna)
+				F.Intrinsic.Control.ElseIf(V.Global.sRet,=,"S")
+					F.Intrinsic.Control.CallSub(Subruns)
+				F.Intrinsic.Control.EndIf
+
+			F.ODBC.con!rstInfo.MoveNext
+			F.Intrinsic.Control.If(V.ODBC.con!rstInfo.EOF,=,True)
+				F.Intrinsic.Control.ExitDo
+			F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.Loop
+		F.ODBC.con!rstLayout.MoveNext
+		F.Intrinsic.Control.If(V.ODBC.con!rstInfo.EOF,=,True)
+			F.Intrinsic.Control.ExitDo
+		F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.Loop
+	F.ODBC.con!rstLayout.Close
+	F.ODBC.con!rstInfo.Close
+
+	Gui.FrmDtl.progressDtl.Visible(False)
+	Gui.FrmDtl..Visible(False)
+
+	F.Intrinsic.Control.CallSub(Subprintrpt,"Statement_ID",V.Local.iStatementNum)
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("Please select a Report to run first.","Report Check")
+	Gui.FrmDtl.cmdRun.Enabled(True)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+
+
+Program.Sub.cmdRun_click.End
+
+program.sub.Unload.start
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+
+program.sub.Unload.end
+
+Program.Sub.subCreateTables.Start
+'Check for table and Create if not found
+
+V.Local.bExists.Declare(Boolean)
+
+F.ODBC.Connection!con.TableExists("GAB_NET_CHANGE",V.Local.bExists)
+	F.Intrinsic.Control.If(V.Local.bExists,=,False)
+		'GAB_NET_CHANGE
+		F.ODBC.Connection!con.Execute("CREATE TABLE GAB_NET_CHANGE(MONTHS_12 CHAR(1),GL_ACCOUNT CHAR(15),PERIOD_1_AMT NUMERIC (15,2),PERIOD_2_AMT NUMERIC (15,2),PERIOD_3_AMT NUMERIC (15,2),PERIOD_4_AMT NUMERIC (15,2),PERIOD_5_AMT NUMERIC (15,2),PERIOD_6_AMT NUMERIC (15,2),PERIOD_7_AMT NUMERIC (15,2),PERIOD_8_AMT NUMERIC (15,2),PERIOD_9_AMT NUMERIC (15,2),PERIOD_10_AMT NUMERIC (15,2),PERIOD_11_AMT NUMERIC (15,2),PERIOD_12_AMT NUMERIC (15,2));")
+		F.ODBC.Connection!con.Execute("CREATE UNIQUE NOT MODIFIABLE INDEX GAB_NET_CHANGEK00 USING 0 ON GAB_NET_CHANGE(MONTHS_12, GL_ACCOUNT);")
+	F.Intrinsic.Control.EndIf
+
+F.ODBC.Connection!con.TableExists("GAB_NET_CHANGE_TITLE",V.Local.bExists)
+	F.Intrinsic.Control.If(V.Local.bExists,=,False)
+		'GAB_NET_CHANGE_TITLE
+		F.ODBC.Connection!con.Execute("CREATE TABLE GAB_NET_CHANGE_TITLE(MONTHS_12 CHAR(1),PERIOD_1_DATE DATE,PERIOD_2_DATE DATE,PERIOD_3_DATE DATE,PERIOD_4_DATE DATE,PERIOD_5_DATE DATE,PERIOD_6_DATE DATE,PERIOD_7_DATE DATE,PERIOD_8_DATE DATE,PERIOD_9_DATE DATE,PERIOD_10_DATE DATE,PERIOD_11_DATE DATE,PERIOD_12_DATE DATE);")
+		F.ODBC.Connection!con.Execute("CREATE UNIQUE NOT MODIFIABLE INDEX GAB_NET_CHG_TITLEK00 USING 0 ON GAB_NET_CHANGE_TITLE(MONTHS_12);")
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.ExitSub
+
+F.ODBC.Connection!con.TableExists("GAB_FIN_STATE_DTL",V.Local.bExists)
+	F.Intrinsic.Control.If(V.Local.bExists,=,False)
+		'GAB_FIN_STATE_DTL
+		F.ODBC.Connection!con.Execute("CREATE TABLE GAB_FIN_STATE_DTL(ID IDENTITY DEFAULT '0',STATEMENT_NUM INTEGER,GROUP_ORDER INTEGER,SUB_GROUP INTEGER,TITLE VARCHAR(50),CP_AMOUNT NUMERIC(15,0),CP_PERCENT NUMERIC(4,1),CY_AMOUNT NUMERIC(15,0),CY_PERCENT NUMERIC(4,1),PY_AMOUNT NUMERIC(15,0),PY_PERCENT NUMERIC(4,1),PPY_AMOUNT NUMERIC(15,0),PPY_PERCENT NUMERIC(4,1),NC_AMOUNT NUMERIC(15,0),NC_PERCENT NUMERIC(4,1),NC_PERCENT_COMPARE NUMERIC(4,1),PRIMARY KEY (ID),UNIQUE (ID));")
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.ExitSub
+
+Program.Sub.subCreateTables.End
+
+Program.Sub.cmdUpdate_click.Start
+'Used to Populate GAB_NET_CHANGE
+
+V.Local.sSQL.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.iCount.Declare(Long)
+V.Local.iCount2.Declare(Long)
+V.Local.sCount2.Declare(String)
+V.Local.sLoadMsg.Declare(String)
+V.Local.iProCnt.Declare(Long,0)
+V.Local.iProgTotal.Declare(Long)
+V.Local.sGLAcct.Declare(String)
+V.Local.sYear.Declare(String)
+V.Local.fAmount.Declare(Float)
+V.Local.sPeriod.Declare(String)
+V.Local.fPeriod1.Declare(Float)
+V.Local.fPeriod2.Declare(Float)
+V.Local.fPeriod3.Declare(Float)
+V.Local.fPeriod4.Declare(Float)
+V.Local.fPeriod5.Declare(Float)
+V.Local.fPeriod6.Declare(Float)
+V.Local.fPeriod7.Declare(Float)
+V.Local.fPeriod8.Declare(Float)
+V.Local.fPeriod9.Declare(Float)
+V.Local.fPeriod10.Declare(Float)
+V.Local.fPeriod11.Declare(Float)
+V.Local.fPeriod12.Declare(Float)
+V.Local.sDate.Declare(String)
+V.Local.dDate.Declare(Date)
+V.Local.dEndMoDate1.Declare(Date)
+V.Local.dEndMoDate2.Declare(Date)
+V.Local.dEndMoDate3.Declare(Date)
+V.Local.dEndMoDate4.Declare(Date)
+V.Local.dEndMoDate5.Declare(Date)
+V.Local.dEndMoDate6.Declare(Date)
+V.Local.dEndMoDate7.Declare(Date)
+V.Local.dEndMoDate8.Declare(Date)
+V.Local.dEndMoDate9.Declare(Date)
+V.Local.dEndMoDate10.Declare(Date)
+V.Local.dEndMoDate11.Declare(Date)
+V.Local.dEndMoDate12.Declare(Date)
+V.Local.sLastRunText.Declare(String)
+
+V.Local.sYear.Set(V.Screen.FrmDtl!dropdownlistYear.Text)
+V.Local.sPeriod.Set(V.Screen.FrmDtl!dropdownlistMonth.Text)
+
+Gui.FrmDtl.optYes.Enabled(False)
+Gui.FrmDtl.optNo.Enabled(False)
+Gui.FrmDtl.dropdownlistMonth.Enabled(False)
+Gui.FrmDtl.dropdownlistYear.Enabled(False)
+Gui.FrmDtl.cmdUpdate.Enabled(False)
+
+'Get Count for progress bar
+F.ODBC.Connection!con.ExecuteAndReturn("SELECT COUNT(DISTINCT GL_ACCOUNT) FROM BI_NET_CHANGE",V.Local.iProgTotal)
+
+F.Intrinsic.Control.If(V.Local.sPeriod,=,"")
+	F.Intrinsic.Control.AndIf(V.Local.sYear,=,"")
+		F.Intrinsic.UI.Msgbox("Please select a Month and Year.","Input Validation:")
+F.Intrinsic.Control.ElseIf(V.Local.sPeriod,=,"")
+	F.Intrinsic.UI.Msgbox("Please select a Month.","Input Validation:")
+F.Intrinsic.Control.ElseIf(V.Local.sYear,=,"")
+	F.Intrinsic.UI.Msgbox("Please select a Year.","Input Validation:")
+F.Intrinsic.Control.ElseIf(V.Local.iProgTotal,=,0)
+	F.Intrinsic.UI.Msgbox("Please run General Ledger > Administration > Net Change Summary by Account before running this program.","Data Validation")
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.Else
+	'Clear GAB Tables for new data
+	F.ODBC.Connection!con.Execute("DELETE FROM GAB_NET_CHANGE;")
+	F.ODBC.Connection!con.Execute("DELETE FROM GAB_NET_CHANGE_TITLE;")
+	Gui.FrmDtl.progress36.Visible(True)
+	Gui.FrmDtl.progress36.Max(V.Local.iProgTotal)
+	'Get the # of GL Accounts (Outside Loop)
+	F.ODBC.Connection!con.OpenRecordsetRO("rstGL","SELECT DISTINCT GL_ACCOUNT FROM BI_NET_CHANGE;")
+		F.Intrinsic.Control.DoUntil(V.ODBC.con!rstGL.EOF,=,True)
+			F.Intrinsic.Math.Add(V.Local.iProCnt,1,V.Local.iProCnt)
+			Gui.FrmDtl.progress36.Value(V.Local.iProCnt)
+			V.Local.sGLAcct.Set(V.ODBC.con!rstGL.FieldVal!GL_ACCOUNT)
+			V.Local.sYear.Set(V.Screen.FrmDtl!dropdownlistYear.Text)
+			V.Local.sPeriod.Set(V.Screen.FrmDtl!dropdownlistMonth.Text)
+				F.Intrinsic.Control.For(V.Local.iCount,1,3,1)
+					F.Intrinsic.Control.For(V.Local.iCount2,1,12,1)
+						'Get and set the Amount for GL Account, Year, and Period
+						F.Intrinsic.String.Concat("SELECT NET_CHANGE FROM BI_NET_CHANGE WHERE GL_ACCOUNT = '",V.Local.sGLAcct,"' AND FISCAL_YEAR = '",V.Local.sYear,"' AND PERIOD = '",V.Local.sPeriod,"';",V.Local.sSQL)
+						F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.fAmount)
+							F.Intrinsic.String.ConvertToString(V.Local.iCount2,V.Local.sCount2)
+							F.Intrinsic.String.Format(V.Local.sCount2,00,V.Local.sCount2)
+							F.Intrinsic.Control.SelectCase(V.Local.sCount2)
+								F.Intrinsic.Control.Case(01)
+									V.Local.fPeriod12.Set(V.Local.fAmount)
+									F.Intrinsic.String.Concat(V.Local.sPeriod,"/01/",V.Local.sYear,V.Local.sDate)
+									F.Intrinsic.Date.EndOfMonth(V.Local.sDate,V.Local.dEndMoDate12)
+								F.Intrinsic.Control.Case(02)
+									V.Local.fPeriod11.Set(V.Local.fAmount)
+									F.Intrinsic.String.Concat(V.Local.sPeriod,"/01/",V.Local.sYear,V.Local.sDate)
+									F.Intrinsic.Date.EndOfMonth(V.Local.sDate,V.Local.dEndMoDate11)
+								F.Intrinsic.Control.Case(03)
+									V.Local.fPeriod10.Set(V.Local.fAmount)
+									F.Intrinsic.String.Concat(V.Local.sPeriod,"/01/",V.Local.sYear,V.Local.sDate)
+									F.Intrinsic.Date.EndOfMonth(V.Local.sDate,V.Local.dEndMoDate10)
+								F.Intrinsic.Control.Case(04)
+									V.Local.fPeriod9.Set(V.Local.fAmount)
+									F.Intrinsic.String.Concat(V.Local.sPeriod,"/01/",V.Local.sYear,V.Local.sDate)
+									F.Intrinsic.Date.EndOfMonth(V.Local.sDate,V.Local.dEndMoDate9)
+								F.Intrinsic.Control.Case(05)
+									V.Local.fPeriod8.Set(V.Local.fAmount)
+									F.Intrinsic.String.Concat(V.Local.sPeriod,"/01/",V.Local.sYear,V.Local.sDate)
+									F.Intrinsic.Date.EndOfMonth(V.Local.sDate,V.Local.dEndMoDate8)
+								F.Intrinsic.Control.Case(06)
+									V.Local.fPeriod7.Set(V.Local.fAmount)
+									F.Intrinsic.String.Concat(V.Local.sPeriod,"/01/",V.Local.sYear,V.Local.sDate)
+									F.Intrinsic.Date.EndOfMonth(V.Local.sDate,V.Local.dEndMoDate7)
+								F.Intrinsic.Control.Case(07)
+									V.Local.fPeriod6.Set(V.Local.fAmount)
+									F.Intrinsic.String.Concat(V.Local.sPeriod,"/01/",V.Local.sYear,V.Local.sDate)
+									F.Intrinsic.Date.EndOfMonth(V.Local.sDate,V.Local.dEndMoDate6)
+								F.Intrinsic.Control.Case(08)
+									V.Local.fPeriod5.Set(V.Local.fAmount)
+									F.Intrinsic.String.Concat(V.Local.sPeriod,"/01/",V.Local.sYear,V.Local.sDate)
+									F.Intrinsic.Date.EndOfMonth(V.Local.sDate,V.Local.dEndMoDate5)
+								F.Intrinsic.Control.Case(09)
+									V.Local.fPeriod4.Set(V.Local.fAmount)
+									F.Intrinsic.String.Concat(V.Local.sPeriod,"/01/",V.Local.sYear,V.Local.sDate)
+									F.Intrinsic.Date.EndOfMonth(V.Local.sDate,V.Local.dEndMoDate4)
+								F.Intrinsic.Control.Case(10)
+									V.Local.fPeriod3.Set(V.Local.fAmount)
+									F.Intrinsic.String.Concat(V.Local.sPeriod,"/01/",V.Local.sYear,V.Local.sDate)
+									F.Intrinsic.Date.EndOfMonth(V.Local.sDate,V.Local.dEndMoDate3)
+								F.Intrinsic.Control.Case(11)
+									V.Local.fPeriod2.Set(V.Local.fAmount)
+									F.Intrinsic.String.Concat(V.Local.sPeriod,"/01/",V.Local.sYear,V.Local.sDate)
+									F.Intrinsic.Date.EndOfMonth(V.Local.sDate,V.Local.dEndMoDate2)
+								F.Intrinsic.Control.Case(12)
+									V.Local.fPeriod1.Set(V.Local.fAmount)
+									F.Intrinsic.String.Concat(V.Local.sPeriod,"/01/",V.Local.sYear,V.Local.sDate)
+									F.Intrinsic.Date.EndOfMonth(V.Local.sDate,V.Local.dEndMoDate1)
+										'Update the table with Amounts
+										F.ODBC.Connection!con.OpenRecordsetRW("rstUpdate","SELECT * FROM GAB_NET_CHANGE;")
+										F.ODBC.con!rstUpdate.AddNew
+										F.ODBC.con!rstUpdate.Set!MONTHS_12(V.Local.iCount)
+										F.ODBC.con!rstUpdate.Set!GL_ACCOUNT(V.Local.sGLAcct)
+										F.ODBC.con!rstUpdate.Set!PERIOD_1_AMT(V.Local.fPeriod1)
+										F.ODBC.con!rstUpdate.Set!PERIOD_2_AMT(V.Local.fPeriod2)
+										F.ODBC.con!rstUpdate.Set!PERIOD_3_AMT(V.Local.fPeriod3)
+										F.ODBC.con!rstUpdate.Set!PERIOD_4_AMT(V.Local.fPeriod4)
+										F.ODBC.con!rstUpdate.Set!PERIOD_5_AMT(V.Local.fPeriod5)
+										F.ODBC.con!rstUpdate.Set!PERIOD_6_AMT(V.Local.fPeriod6)
+										F.ODBC.con!rstUpdate.Set!PERIOD_7_AMT(V.Local.fPeriod7)
+										F.ODBC.con!rstUpdate.Set!PERIOD_8_AMT(V.Local.fPeriod8)
+										F.ODBC.con!rstUpdate.Set!PERIOD_9_AMT(V.Local.fPeriod9)
+										F.ODBC.con!rstUpdate.Set!PERIOD_10_AMT(V.Local.fPeriod10)
+										F.ODBC.con!rstUpdate.Set!PERIOD_11_AMT(V.Local.fPeriod11)
+										F.ODBC.con!rstUpdate.Set!PERIOD_12_AMT(V.Local.fPeriod12)
+										F.ODBC.con!rstUpdate.Update
+										F.ODBC.con!rstUpdate.Close
+							F.Intrinsic.Control.EndSelect
+							F.Intrinsic.Control.If(V.Local.sPeriod,=,01)
+								F.Intrinsic.Math.Sub(V.Local.sYear,1,V.Local.sYear)
+								V.Local.sPeriod.Set(12)
+							F.Intrinsic.Control.Else
+								F.Intrinsic.Math.Sub(V.Local.sPeriod,1,V.Local.sPeriod)
+								F.Intrinsic.String.Format(V.Local.sPeriod,00,V.Local.sPeriod)
+							F.Intrinsic.Control.EndIf
+					F.Intrinsic.Control.Next(V.Local.iCount2)
+'				'Update the table with Dates
+				F.Intrinsic.String.Concat("SELECT MONTHS_12 FROM GAB_NET_CHANGE_TITLE WHERE MONTHS_12 = '",V.Local.iCount,"';",V.Local.sSQL)
+				F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.sRet)
+					F.Intrinsic.Control.If(V.Local.sRet,=,"")
+						F.ODBC.Connection!con.OpenRecordsetRW("rstTitle","SELECT * FROM GAB_NET_CHANGE_TITLE;")
+						F.ODBC.con!rstTitle.AddNew
+						F.ODBC.con!rstTitle.Set!MONTHS_12(V.Local.iCount)
+						F.ODBC.con!rstTitle.Set!PERIOD_1_DATE(V.Local.dEndMoDate1)
+						F.ODBC.con!rstTitle.Set!PERIOD_2_DATE(V.Local.dEndMoDate2)
+						F.ODBC.con!rstTitle.Set!PERIOD_3_DATE(V.Local.dEndMoDate3)
+						F.ODBC.con!rstTitle.Set!PERIOD_4_DATE(V.Local.dEndMoDate4)
+						F.ODBC.con!rstTitle.Set!PERIOD_5_DATE(V.Local.dEndMoDate5)
+						F.ODBC.con!rstTitle.Set!PERIOD_6_DATE(V.Local.dEndMoDate6)
+						F.ODBC.con!rstTitle.Set!PERIOD_7_DATE(V.Local.dEndMoDate7)
+						F.ODBC.con!rstTitle.Set!PERIOD_8_DATE(V.Local.dEndMoDate8)
+						F.ODBC.con!rstTitle.Set!PERIOD_9_DATE(V.Local.dEndMoDate9)
+						F.ODBC.con!rstTitle.Set!PERIOD_10_DATE(V.Local.dEndMoDate10)
+						F.ODBC.con!rstTitle.Set!PERIOD_11_DATE(V.Local.dEndMoDate11)
+						F.ODBC.con!rstTitle.Set!PERIOD_12_DATE(V.Local.dEndMoDate12)
+						F.ODBC.con!rstTitle.Update
+						F.ODBC.con!rstTitle.Close
+					F.Intrinsic.Control.EndIf
+				F.Intrinsic.Control.Next(V.Local.iCount)
+			F.ODBC.con!rstGL.MoveNext
+		F.Intrinsic.Control.Loop
+	F.ODBC.con!rstGL.Close
+	Gui.FrmDtl.progress36.Visible(False)
+	Gui.FrmDtl.optYes.Value(False)
+	Gui.FrmDtl.optNo.Value(True)
+	Gui.FrmDtl.dropdownlistMonth.Enabled(False)
+	Gui.FrmDtl.dropdownlistYear.Enabled(False)
+	Gui.FrmDtl.cmdUpdate.Enabled(False)
+	Gui.FrmDtl.lblLastRun.Visible(True)
+	F.ODBC.Connection!con.ExecuteAndReturn("SELECT PERIOD_12_DATE FROM GAB_NET_CHANGE_TITLE WHERE MONTHS_12 = '1';",V.Global.dNetChgChk)
+	F.Intrinsic.String.Build("Last run selection: {0}.",V.Global.dNetChgChk,V.Local.sLastRunText)
+	Gui.FrmDtl.lblLastRun.Caption(V.Local.sLastRunText)
+	Gui.FrmDtl.cboFin.Enabled(True)
+	Gui.FrmDtl.cmdRun.Enabled(True)
+	Gui.FrmDtl.optYes.Enabled(True)
+	Gui.FrmDtl.optNo.Enabled(True)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+Program.Sub.cmdUpdate_click.End
+
+program.sub.opt_click.start
+
+F.Intrinsic.Control.If(V.Screen.FrmDtl!optYes.Value,=,True)
+	Gui.FrmDtl.optYes.Value(True)
+	Gui.FrmDtl.optNo.Value(False)
+	Gui.FrmDtl.dropdownlistMonth.Enabled(True)
+	Gui.FrmDtl.dropdownlistYear.Enabled(True)
+	Gui.FrmDtl.cmdUpdate.Enabled(True)
+	Gui.FrmDtl.lblDesc.Enabled(False)
+	Gui.FrmDtl.cboFin.Enabled(False)
+	Gui.FrmDtl.cmdRun.Enabled(False)
+F.Intrinsic.Control.Else
+	Gui.FrmDtl.optYes.Value(False)
+	Gui.FrmDtl.optNo.Value(True)
+	Gui.FrmDtl.dropdownlistMonth.Enabled(False)
+	Gui.FrmDtl.dropdownlistYear.Enabled(False)
+	Gui.FrmDtl.cmdUpdate.Enabled(False)
+	Gui.FrmDtl.lblDesc.Enabled(True)
+	Gui.FrmDtl.cboFin.Enabled(True)
+	Gui.FrmDtl.cmdRun.Enabled(True)
+F.Intrinsic.Control.EndIf
+
+program.sub.opt_click.end
+
+Program.Sub.subPrintRpt.Start
+V.Local.iBIRunID.Declare(Long)
+V.Local.iBILogID.Declare(Long)
+V.Local.sParams.Declare(String)
+V.Local.sValues.Declare(String)
+V.Local.sEndDate.Declare(String)
+V.local.iRet.Declare(Long)
+V.Local.sRptName.Declare(String)
+V.Local.iRptID.Declare(Long)
+
+F.Intrinsic.String.Format(V.Global.dNetChgChk,"MMMM DD, YYYY",V.Local.sEndDate)
+
+F.Intrinsic.String.Build("SELECT REPORT_NAME FROM GAB_FIN_STATE_REPORT WHERE STATEMENT_NUM = {0};",V.Args.Statement_ID,V.Global.sSQL)
+F.ODBC.Connection!con.ExecuteAndReturn(V.Global.sSQL,V.Local.sRptName)
+F.Global.BI.GetIDFromName(V.Local.sRptName,V.Local.iRptID)
+
+F.Global.BI.GetRunID(V.Local.iBIRunID)
+F.Global.BI.StartLogging(V.Local.iBIRunID,V.Local.iRptID,10,"",V.Local.iBILogID)
+
+V.Local.sParams.Set("EndDate*!*StatementName")
+F.Intrinsic.String.Build("{0}*!*{1}",V.Local.sEndDate,V.Screen.FrmDtl!cboFin.Text,V.Local.sValues)
+
+F.Global.BI.RunReportPreProcessor(V.Local.iBIRunID,V.Local.iBILogID,V.Local.sParams,V.Local.sValues,"",-1,True,"",-1,"",-1,"","",V.Local.iRet)
+
+F.Global.BI.StopLogging(V.Local.iBILogID)
+
+Program.Sub.subPrintRpt.End
+
+Program.Sub.Comments.Start
+${$0$}$GAB_Fin_State_Load_Data$}$SUPERVSR$}$01/01/1900
+Program.Sub.Comments.End
+
