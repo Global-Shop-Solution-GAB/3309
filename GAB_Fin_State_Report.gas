@@ -1,0 +1,497 @@
+Program.Sub.ScreenSU.Start
+gui.FrmReport..create
+gui.FrmReport..caption("Financial Statement Reports")
+gui.FrmReport..size(6525,9100)
+gui.FrmReport..minx(6525)
+gui.FrmReport..miny(9100)
+gui.FrmReport..position(0,0)
+gui.FrmReport..event(unload,Unload)
+gui.FrmReport..alwaysontop(False)
+gui.FrmReport..fontname("Arial")
+gui.FrmReport..fontsize(8)
+gui.FrmReport..forecolor(0)
+gui.FrmReport..fontstyle(,,,,)
+gui.FrmReport..BackColor(-2147483633)
+gui.FrmReport..controlbox(True)
+gui.FrmReport..maxbutton(False)
+gui.FrmReport..minbutton(True)
+gui.FrmReport..mousepointer(0)
+gui.FrmReport..moveable(True)
+gui.FrmReport..sizeable(False)
+gui.FrmReport..ShowInTaskBar(True)
+gui.FrmReport..titlebar(True)
+gui.FrmReport.gsfgReport.create(gsflexgrid)
+gui.FrmReport.gsfgReport.FixedRows(0)
+gui.FrmReport.gsfgReport.FixedCols(0)
+gui.FrmReport.gsfgReport.visible(True)
+gui.FrmReport.gsfgReport.size(5875,7700)
+gui.FrmReport.gsfgReport.zorder(0)
+gui.FrmReport.gsfgReport.position(200,200)
+gui.FrmReport.gsfgReport.enabled(True)
+gui.FrmReport.gsfgReport.event(mouseup,gsfgReport_mouseup)
+gui.FrmReport.cmdSave.create(button)
+gui.FrmReport.cmdSave.caption("Save")
+gui.FrmReport.cmdSave.visible(True)
+gui.FrmReport.cmdSave.size(855,375)
+gui.FrmReport.cmdSave.zorder(0)
+gui.FrmReport.cmdSave.position(300,8000)
+gui.FrmReport.cmdSave.enabled(True)
+gui.FrmReport.cmdSave.fontname("Arial")
+gui.FrmReport.cmdSave.fontsize(8)
+gui.FrmReport.cmdSave.event(click,cmdSave_click)
+gui.FrmReport.cmdSave.defaultvalue("")
+gui.FrmReport.cmdSave.controlgroup(0)
+gui.FrmReport.progress1.create(progressbar)
+gui.FrmReport.progress1.visible(False)
+gui.FrmReport.progress1.size(5000,400)
+gui.FrmReport.progress1.zorder(0)
+gui.FrmReport.progress1.position(600,3500)
+gui.FrmReport.progress1.enabled(True)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.UDT.GAB_FIN_STATE_REPORT.Define("ID",Long,ID)
+Variable.UDT.GAB_FIN_STATE_REPORT.Define("STATEMENT_NUM",Long,STATEMENT_NUM)
+Variable.UDT.GAB_FIN_STATE_REPORT.Define("REPORT_NAME",String,REPORT_NAME)
+Variable.uGlobal.uReport.Declare("GAB_FIN_STATE_REPORT")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'This is going to be used to link reports to Financial Statements
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'============================================================================================================================================================================================================================
+
+V.Local.sIcon.Declare(String)
+
+'F.Intrinsic.String.Build("{0}\gss.ico",V.Caller.InstallDir,V.Local.sIcon)
+'Gui.FrmReport..Icon(V.Local.sIcon)
+
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+F.Intrinsic.Control.CallSub(Subcreatetable)
+F.Intrinsic.Control.CallSub(Subbuildstyles)
+F.Intrinsic.Control.CallSub(Subpopulateudts)
+
+Gui.FrmReport..Show
+
+'============================================================================================================================================================================================================================
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_Fin_State_Report.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.Main.End
+
+Program.Sub.subBuildStyles.Start
+'Define Build Styles for Flex Grid
+F.Intrinsic.Control.SetErrorHandler("subBuildStyles_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'============================================================================================================================================================================================================================
+
+'Set Column
+Gui.FrmReport.gsfgReport.Cols(5)
+
+'Set Rows
+Gui.FrmReport.gsfgReport.Rows(2)
+Gui.FrmReport.gsfgReport.FixedRows(1)
+Gui.FrmReport.gsfgReport.RowHeight(0,500)
+
+Gui.FrmReport.gsfgReport.SetProperty("Enter",2)
+
+'ID
+Gui.FrmReport.gsfgReport.TextMatrix(0,0,"ID")
+Gui.FrmReport.gsfgReport.ColWidth(0,500)
+Gui.FrmReport.gsfgReport.BuildStyle(0,0,"Format","Alignment",4)
+Gui.FrmReport.gsfgReport.BuildStyle(1,0,"Format","Alignment",4)
+Gui.FrmReport.gsfgReport.BuildStyle(1,0,"Type","Locked","True")
+Gui.FrmReport.gsfgReport.BuildStyle(1,0,"Color","Back",-2147483633)
+Gui.FrmReport.gsfgReport.BuildStyle(1,0,"Format","Numeric",True)
+
+'Statement Number
+V.Local.sStatementNumber.Declare(String)
+F.Intrinsic.String.Build("Statement{0}Number",V.Ambient.NewLine,V.Local.sStatementNumber)
+Gui.FrmReport.gsfgReport.TextMatrix(1,0,V.Local.sStatementNumber)
+Gui.FrmReport.gsfgReport.ColWidth(1,1000)
+Gui.FrmReport.gsfgReport.BuildStyle(0,1,"Format","Alignment",4)
+Gui.FrmReport.gsfgReport.BuildStyle(1,1,"Format","Alignment",4)
+Gui.FrmReport.gsfgReport.BuildStyle(1,1,"Format","Numeric",True)
+
+'Report Name
+Gui.FrmReport.gsfgReport.TextMatrix(2,0,"Report Name")
+Gui.FrmReport.gsfgReport.ColWidth(2,3000)
+Gui.FrmReport.gsfgReport.BuildStyle(0,2,"Format","Alignment",2)
+Gui.FrmReport.gsfgReport.BuildStyle(1,2,"Format","Alignment",2)
+
+'Add Row
+Gui.FrmReport.gsfgReport.TextMatrix(3,0,"")
+Gui.FrmReport.gsfgReport.ColWidth(3,600)
+Gui.FrmReport.gsfgReport.BuildStyle(1,3,"Format","Alignment",4)
+Gui.FrmReport.gsfgReport.BuildStyle(1,3,"Type","Command","Add")
+
+'Delete Row
+Gui.FrmReport.gsfgReport.TextMatrix(4,0,"")
+Gui.FrmReport.gsfgReport.ColWidth(4,600)
+Gui.FrmReport.gsfgReport.BuildStyle(1,4,"Format","Alignment",4)
+Gui.FrmReport.gsfgReport.BuildStyle(1,4,"Type","Command","Delete")
+
+
+'Apply Styles to the grid
+Gui.FrmReport.gsfgReport.ApplyStyle(0,0)
+Gui.FrmReport.gsfgReport.ApplyStyle(1,1)
+
+F.Intrinsic.Control.ExitSub
+
+'============================================================================================================================================================================================================================
+F.Intrinsic.Control.Label("subBuildStyles_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_Fin_State_Report.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.subBuildStyles.End
+
+Program.Sub.Unload.Start
+F.Intrinsic.Control.SetErrorHandler("Unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'============================================================================================================================================================================================================================
+
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+
+'============================================================================================================================================================================================================================
+F.Intrinsic.Control.Label("Unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_Fin_State_Report.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.Unload.End
+
+Program.Sub.subApplyStyles.Start
+'Set Styles for each row
+
+F.Intrinsic.Control.SetErrorHandler("subApplyStyles_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'============================================================================================================================================================================================================================
+
+V.Local.iC.Declare(Long,1)
+V.Local.iRows.Declare(Long)
+V.Local.iNewRow.Declare(Long)
+
+F.Intrinsic.Control.If(V.Args.LoadGSFG,=,True)
+	F.Intrinsic.Math.Add(V.Screen.FrmReport!gsfgReport.Rows,1,V.Local.iNewRow)
+	Gui.FrmReport.gsfgReport.Rows(V.Local.iNewRow)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Math.Sub(V.Screen.FrmReport!gsfgReport.Rows,1,V.Local.iRows)
+F.Intrinsic.Control.For(V.Local.iC,1,V.Local.iRows,1)
+	Gui.FrmReport.gsfgReport.ApplyStyle(V.Local.iC,1)
+	Gui.FrmReport.gsfgReport.TextMatrix(0,V.Local.iC,V.Local.iC)
+F.Intrinsic.Control.Next(V.Local.iC)
+
+F.Intrinsic.Control.ExitSub
+
+'============================================================================================================================================================================================================================
+F.Intrinsic.Control.Label("subApplyStyles_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_Fin_State_Report.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.subApplyStyles.End
+
+Program.Sub.subPopulateUDTs.Start
+'Populate the flexgrid with data if populated
+F.Intrinsic.Control.SetErrorHandler("subPopulateUDTs_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'============================================================================================================================================================================================================================
+
+V.Local.sSQL.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.iRet.Declare(Long)
+V.Local.bFileExists.Declare(Boolean)
+V.Local.sCopyFrom.Declare(String)
+V.Local.sCopyTo.Declare(String)
+
+F.Intrinsic.String.Build("{0}\GAB_FIN_STATE_REPORT.MKD",V.Caller.DDFDir,V.Local.sCopyFrom)
+F.Intrinsic.String.Build("{0}\GAB_FIN_STATE_REPORT_BEFORE.MKD",V.Caller.DDFDir,V.Local.sCopyTo)
+
+F.ODBC.Connection!con.OpenRecordsetRO("rstReport","SELECT * FROM GAB_FIN_STATE_REPORT ORDER BY ID;")
+F.Intrinsic.Control.If(V.ODBC.con!rstReport.EOF,=,False)
+	F.Intrinsic.Variable.LoadUDTFromRecordset("con","rstReport","V.uGlobal.uReport",False,100000)
+	F.Intrinsic.Control.CallSub(Subloadgsfg)
+	F.ODBC.con!rstReport.Close
+F.Intrinsic.Control.Else
+	F.ODBC.con!rstReport.Close
+	F.Intrinsic.File.Exists(V.Local.sCopyTo,V.Local.bFileExists)
+	F.Intrinsic.Control.If(V.Local.bFileExists,=,True)
+		F.Intrinsic.UI.Msgbox("Do you want to restore the orignal file?","Restore",4,V.Local.iRet)
+		F.Intrinsic.Control.If(V.Local.iRet,=,6)
+			F.Intrinsic.File.DeleteFile(V.Local.sCopyFrom)
+			F.Intrinsic.File.CopyFile(V.Local.sCopyTo,V.Local.sCopyFrom)
+			F.Intrinsic.UI.Msgbox("Please relaunch the program to populate the restored data.","Restore Complete")
+			F.Intrinsic.Control.CallSub(Unload)
+		F.Intrinsic.Control.Else
+			Gui.FrmReport.gsfgReport.TextMatrix(0,1,1)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Else
+		Gui.FrmReport.gsfgReport.TextMatrix(0,1,1)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+'============================================================================================================================================================================================================================
+F.Intrinsic.Control.Label("subPopulateUDTs_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_Fin_State_Report.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.subPopulateUDTs.End
+
+Program.Sub.subLoadGSFG.Start
+'Load the GSFG from an UDT
+
+F.Intrinsic.Control.SetErrorHandler("subLoadGSFG_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'============================================================================================================================================================================================================================
+
+V.Local.bLoadGSFG.Declare(Boolean,True)
+
+Gui.FrmReport.gsfgReport.LoadFromUDT("V.uGlobal.uReport","ID::0*!*Statement_Num::1*!*Report_Name::2",2)
+F.Intrinsic.Control.CallSub(Subapplystyles,"LoadGSFG",V.Local.bLoadGSFG)
+
+F.Intrinsic.Control.ExitSub
+
+'============================================================================================================================================================================================================================
+F.Intrinsic.Control.Label("subLoadGSFG_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_Fin_State_Report.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.subLoadGSFG.End
+
+Program.Sub.subRowDel.Start
+F.Intrinsic.Control.SetErrorHandler("subRowDel_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'============================================================================================================================================================================================================================
+
+V.Local.bLoadGSFG.Declare(Boolean,False)
+
+Gui.FrmReport.gsfgReport.Visible(False)
+
+F.Intrinsic.Control.If(V.Screen.FrmReport!gsfgReport.Rows,>,2)
+	Gui.FrmReport.gsfgReport.DeleteRow(V.Args.Row)
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("This is the last row and you cannot remove it. Please edit the data if needed and save.","Row Check")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.CallSub(Subapplystyles,"LoadGSFG",V.Local.bLoadGSFG)
+
+Gui.FrmReport.gsfgReport.Visible(True)
+
+'============================================================================================================================================================================================================================
+F.Intrinsic.Control.Label("subRowDel_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_Fin_State_Report.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.subRowDel.End
+
+Program.Sub.subRowAdd.Start
+F.Intrinsic.Control.SetErrorHandler("subRowAdd_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'============================================================================================================================================================================================================================
+
+V.Local.iInsertRow.Declare(Long)
+V.Local.bLoadGSFG.Declare(Boolean,False)
+
+Gui.FrmReport.gsfgReport.Visible(False)
+
+F.Intrinsic.Math.Add(V.Args.Row,1,V.Local.iInsertRow)
+
+Gui.FrmReport.gsfgReport.InsertRow(V.Local.iInsertRow)
+
+F.Intrinsic.Control.CallSub(Subapplystyles,"LoadGSFG",V.Local.bLoadGSFG)
+
+Gui.FrmReport.gsfgReport.Visible(True)
+
+'============================================================================================================================================================================================================================
+F.Intrinsic.Control.Label("subRowAdd_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_Fin_State_Report.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.subRowAdd.End
+
+program.sub.cmdSave_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdSave_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'============================================================================================================================================================================================================================
+
+V.Local.iCnt.Declare(Long,1)
+V.Local.iC.Declare(Long,-1)
+V.Local.iID.Declare(Long)
+V.Local.iStateNum.Declare(Long)
+V.Local.sStateName.Declare(String)
+V.Local.iGrpOrd.Declare(Long)
+V.Local.sGrpName.Declare(String)
+V.Local.iRowTotal.Declare(Long)
+V.Local.iProgressBar.Declare(Long)
+V.Local.sCopyFrom.Declare(String)
+V.Local.sCopyTo.Declare(String)
+
+Gui.FrmReport.gsfgReport.Visible(False)
+Gui.FrmReport.progress1.Visible(True)
+
+F.Intrinsic.String.Build("{0}\GAB_FIN_STATE_REPORT.MKD",V.Caller.DDFDir,V.Local.sCopyFrom)
+F.Intrinsic.String.Build("{0}\GAB_FIN_STATE_REPORT_BEFORE.MKD",V.Caller.DDFDir,V.Local.sCopyTo)
+F.Intrinsic.File.CopyOpenFile(V.Local.sCopyFrom,V.Local.sCopyTo)
+
+V.uGlobal.uReport.Redim(-1,-1)
+F.ODBC.Connection!con.Execute("DELETE FROM GAB_FIN_STATE_REPORT;")
+
+F.Intrinsic.Math.Sub(V.Screen.FrmReport!gsfgReport.Rows,1,V.Local.iRowTotal)
+Gui.FrmReport.progress1.Max(V.Local.iRowTotal)
+F.Intrinsic.Control.For(V.Local.iCnt,1,V.Local.iRowTotal,1)
+	Gui.FrmReport.progress1.Value(V.Local.iCnt)
+	F.Intrinsic.Math.Add(V.Local.iC,1,V.Local.iC)
+	F.Intrinsic.Control.If(V.Local.iC,=,0)
+		V.uGlobal.uReport.Redim(0,0)
+	F.Intrinsic.Control.Else
+		V.uGlobal.uReport.RedimPreserve(0,V.Local.iC)
+	F.Intrinsic.Control.EndIf
+'ID
+	Gui.FrmReport.gsfgReport.GetTextMatrix(0,V.Local.iCnt,V.Local.iID)
+	V.uGlobal.uReport(V.Local.iC)!ID.Set(V.Local.iID.Long)
+'Statement Num
+	Gui.FrmReport.gsfgReport.GetTextMatrix(1,V.Local.iCnt,V.Local.iStateNum)
+	V.uGlobal.uReport(V.Local.iC)!STATEMENT_NUM.Set(V.Local.iStateNum.Long)
+'Statement Name
+	Gui.FrmReport.gsfgReport.GetTextMatrix(2,V.Local.iCnt,V.Local.sStateName)
+	V.uGlobal.uReport(V.Local.iC)!REPORT_NAME.Set(V.Local.sStateName.String)
+F.Intrinsic.Control.Next(V.Local.iCnt)
+F.Intrinsic.Debug.Stop
+
+F.ODBC.Connection!con.OpenRecordsetRW("rstSave","SELECT * FROM GAB_FIN_STATE_REPORT ORDER BY ID;")
+F.Intrinsic.Variable.SaveUDTToRecordset("con","rstSave","V.uGlobal.uReport")
+F.ODBC.con!rstSave.Close
+
+F.ODBC.Connection!con.Execute("DELETE FROM GAB_FIN_STATE_REPORT WHERE STATEMENT_NUM = '0';")
+F.Intrinsic.Control.CallSub(Subpopulateudts)
+
+'F.Intrinsic.UI.Msgbox("Data Saved.","Complete")
+Gui.FrmReport.gsfgReport.Visible(True)
+Gui.FrmReport.progress1.Visible(False)
+
+F.Intrinsic.Control.ExitSub
+
+'============================================================================================================================================================================================================================
+F.Intrinsic.Control.Label("cmdSave_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_Fin_State_Report.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdSave_click.end
+
+Program.Sub.subCreateTable.Start
+'Create tables if missing
+
+F.Intrinsic.Control.SetErrorHandler("subCreateTable_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'============================================================================================================================================================================================================================
+
+V.Local.bExists.Declare(Boolean)
+
+'GAB_FIN_STATE_REPORT
+F.ODBC.Connection!con.TableExists("GAB_FIN_STATE_REPORT",V.Local.bExists)
+F.Intrinsic.Control.If(V.Local.bExists,=,False)
+	F.ODBC.Connection!con.Execute("CREATE TABLE GAB_FIN_STATE_REPORT(ID IDENTITY DEFAULT '0',STATEMENT_NUM INTEGER,REPORT_NAME VARCHAR(50),PRIMARY KEY (ID),UNIQUE (ID));")
+F.Intrinsic.Control.EndIf
+
+'============================================================================================================================================================================================================================
+F.Intrinsic.Control.Label("subCreateTable_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_Fin_State_Report.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.subCreateTable.End
+
+program.sub.gsfgReport_mouseup.start
+F.Intrinsic.Control.SetErrorHandler("gsfgReport_mouseup_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'============================================================================================================================================================================================================================
+
+V.Local.iRow.Declare(Long)
+V.Local.iCol.Declare(Long)
+
+V.Local.iRow.Set(V.Screen.FrmReport!gsfgReport.Row)
+V.Local.iCol.Set(V.Screen.FrmReport!gsfgReport.Col)
+
+'F.Intrinsic.UI.Msgbox(V.Args.MouseRow,"MouseRow")
+'F.Intrinsic.UI.Msgbox(V.Local.iRow,"Row")
+'F.Intrinsic.UI.Msgbox(V.Local.iCol,"Col")
+
+F.Intrinsic.Control.If(V.Args.MouseRow.Long,=,0)
+	F.Intrinsic.Control.AndIf(V.Local.iRow,=,1)
+	F.Intrinsic.UI.Sleep(1)
+F.Intrinsic.Control.Else
+	F.Intrinsic.Control.SelectCase(V.Local.iCol)
+		F.Intrinsic.Control.Case(3)
+			F.Intrinsic.Control.CallSub(Subrowadd,"Row",V.Local.iRow,"Col",V.Local.iCol)
+		F.Intrinsic.Control.Case(4)
+			F.Intrinsic.Control.CallSub(Subrowdel,"Row",V.Local.iRow,"Col",V.Local.iCol)
+	F.Intrinsic.Control.EndSelect
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+'============================================================================================================================================================================================================================
+F.Intrinsic.Control.Label("gsfgReport_mouseup_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GAB_Fin_State_Report.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+
+program.sub.gsfgReport_mouseup.end
+
+
